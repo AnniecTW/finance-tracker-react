@@ -1,0 +1,123 @@
+:root {
+  --clr-btn: #ffddae;
+  --clr-hl: #d4f6ff;
+  --clr-bg-1: #fbfbfb;
+  --clr-bg-2: #c6e7ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.app {
+  min-height: 66vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10rem;
+  align-items: start;
+}
+
+.button {
+  background-color: var(--clr-bg-1);
+  color: #343a40;
+  font-size: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--clr-btn);
+}
+
+.expensesContainer {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: flex-start;
+}
+
+.list {
+  list-style: none;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 2rem;
+  border-right: 1px solid #ccc;
+  padding-right: 1rem;
+}
+
+.expenseItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1.2rem;
+  border-radius: 7px;
+  transition: 0.5s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.expenseItem:hover {
+  background-color: #f0f0f0;
+}
+
+.total-amount {
+  margin: 6rem 0;
+  font-size: 2.2rem;
+}
+
+.detail {
+  padding-left: 1rem;
+}
+
+form {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  background-color: var(--clr-bg-2);
+  border-radius: 7px;
+  padding: 1.2rem;
+}
+
+form h2 {
+  grid-column: 1 / -1;
+}
+
+input {
+  color: inherit;
+  font-size: 2rem;
+  padding: 0.7rem;
+  text-align: center;
+  border: 1px solid var(--clr-hl);
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--clr-btn);
+}
+
+form .button {
+  margin-top: 1rem;
+  grid-column: 2;
+  width: 50%;
+  justify-self: end;
+}
