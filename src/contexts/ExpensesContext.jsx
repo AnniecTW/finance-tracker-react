@@ -1,4 +1,9 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import {
+  fetchExpenses,
+  saveExpenses,
+  deleteExpenseById,
+} from "../expensesService";
 
 const initialExpenses = [
   { id: 1, item: "Lunch", amount: 200 },
@@ -8,26 +13,40 @@ const initialExpenses = [
 const ExpensesContext = createContext();
 
 function ExpensesProvider({ children }) {
-  const [expenses, setExpenses] = useState(() => {
-    const saved = localStorage.getItem("expenses");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      return parsed.length > 0 ? parsed : initialExpenses;
-    }
-    return initialExpenses; // initail data loading
-  });
+  const [expenses, setExpenses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  //
+  // initail data loading
   useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
+    async function loadExpenses() {
+      const data = await fetchExpenses();
+      if (data.length === 0) {
+        await saveExpenses(initialExpenses);
+        setExpenses(initialExpenses);
+      } else {
+        setExpenses(data);
+      }
+    }
+    loadExpenses();
+  }, []);
 
-  function handleAddExpense(expense) {
-    setExpenses((expenses) => [...expenses, expense]);
+  // add expense
+  async function handleAddExpense(expense) {
+    const newExpenses = [...expenses, expense];
+    setExpenses(newExpenses);
+    await saveExpenses(newExpenses);
+  }
+
+  // delete expense, normally, API doesn't return
+  async function handleDeleteExpense(id) {
+    const updated = await deleteExpenseById(id);
+    setExpenses(updated);
   }
 
   return (
-    <ExpensesContext.Provider value={{ expenses, handleAddExpense }}>
+    <ExpensesContext.Provider
+      value={{ expenses, handleAddExpense, handleDeleteExpense }}
+    >
       {children}
     </ExpensesContext.Provider>
   );
