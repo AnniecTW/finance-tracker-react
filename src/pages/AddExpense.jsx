@@ -29,22 +29,24 @@ function AddExpense() {
     navigate(-1);
   }
   return (
-    <form className="add-expense-form">
-      <h2>Add New Expense 💲</h2>
-      <label>Item</label>
-      <input
-        type="text"
-        value={item}
-        onChange={(e) => setItem(e.target.value)}
-      />
-      <label>Amount</label>
-      <input
-        type="text"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <Button onClick={handleSubmit}>Add</Button>
-    </form>
+    <main>
+      <form className="add-expense-form">
+        <h2>Add New Expense 💲</h2>
+        <label>Item</label>
+        <input
+          type="text"
+          value={item}
+          onChange={(e) => setItem(e.target.value)}
+        />
+        <label>Amount</label>
+        <input
+          type="text"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+        <Button onClick={handleSubmit}>Add</Button>
+      </form>
+    </main>
   );
 }
 

@@ -3,6 +3,7 @@
   --clr-hl: #d4f6ff;
   --clr-bg-1: #fbfbfb;
   --clr-bg-2: #c6e7ff;
+  --spinner-color: #333;
 }
 
 * {
@@ -14,12 +15,24 @@
 body {
   height: 100vh;
   color: #495057;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 2rem;
+  line-height: 1.6;
 }
 
+.layout {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+/*
 .app {
   min-height: 66vh;
   display: grid;
@@ -27,6 +40,7 @@ body {
   column-gap: 10rem;
   align-items: start;
 }
+*/
 
 .button {
   background-color: var(--clr-bg-1);
@@ -120,4 +134,19 @@ form .button {
   grid-column: 2;
   width: 50%;
   justify-self: end;
+}
+
+/* PageNav */
+nav ul {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+nav li {
+  list-style-type: none;
+}
+
+.navLink {
+  text-decoration: none;
 }

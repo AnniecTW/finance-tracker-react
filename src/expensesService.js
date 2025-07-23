@@ -5,7 +5,7 @@ export async function fetchExpenses() {
     return parsed;
   } catch (err) {
     console.error("Failed to fetch expenses: ", err);
-    return [];
+    throw err;
   }
 }
 
@@ -14,6 +14,7 @@ export async function saveExpenses(expenses) {
     localStorage.setItem("expenses", JSON.stringify(expenses));
   } catch (err) {
     console.error("Failed to save expenses: ", err);
+    throw err;
   }
 }
 
@@ -23,9 +24,8 @@ export async function deleteExpenseById(id) {
     const parsed = saved ? JSON.parse(saved) : [];
     const updated = parsed.filter((e) => e.id !== id);
     await saveExpenses(updated);
-    return updated;
   } catch (err) {
     console.error("Failed to delete expenses: ", err);
-    return [];
+    throw err;
   }
 }

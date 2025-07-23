@@ -7,18 +7,20 @@ import { useExpenses } from "../contexts/ExpensesContext";
 function ExpenseList() {
   const { expenses } = useExpenses();
   return (
-    <div className="expensesContainer">
-      <ul className="list">
-        <h2>Expense List 📝</h2>
-        {expenses.map((expense) => (
-          <ExpenseItem key={expense.id} expense={expense} />
-        ))}
-        <TotalAmount expenses={expenses} />
-      </ul>
-      <div className="detail">
-        <Outlet />
-      </div>
-    </div>
+    <main>
+      <section className="expensesContainer">
+        <ul className="list">
+          <h2>Expense List 📝</h2>
+          {expenses.map((expense) => (
+            <ExpenseItem key={expense.id} expense={expense} />
+          ))}
+          <TotalAmount />
+        </ul>
+        <div className="detail">
+          <Outlet />
+        </div>
+      </section>
+    </main>
   );
 }
 
