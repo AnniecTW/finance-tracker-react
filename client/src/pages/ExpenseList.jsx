@@ -5,13 +5,13 @@ import TotalAmount from "../components/TotalAmount";
 import { useExpenses } from "../contexts/ExpensesContext";
 
 function ExpenseList() {
-  const { expenses } = useExpenses();
+  const { allExpenses } = useExpenses();
   return (
     <main>
       <section className="expensesContainer">
         <ul className="list">
           <h2>Expense List 📝</h2>
-          {expenses.map((expense) => (
+          {allExpenses.map((expense) => (
             <ExpenseItem key={expense.id} expense={expense} />
           ))}
           <TotalAmount />

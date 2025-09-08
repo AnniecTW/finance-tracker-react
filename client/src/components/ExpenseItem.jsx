@@ -5,7 +5,7 @@ function ExpenseItem({ expense }) {
     <li>
       <Link to={`${expense.id}`} className="expenseItem">
         <strong>Item:</strong> <span>{expense.item}</span>
-        <strong>Amount:</strong> <span>{expense.amount} NT dollars</span>
+        <strong>Amount:</strong> <span>${expense.amount}</span>
       </Link>
     </li>
   );

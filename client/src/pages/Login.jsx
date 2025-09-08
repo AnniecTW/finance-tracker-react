@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/FakeAuthContext";
 import { useNavigate } from "react-router-dom";
 
-import PageNav from "../components/PageNav";
 import Button from "../components/Button";
 
 function Login() {
   // Pre-fill for dev purpose
-  const [email, setEmail] = useState("ann@example.com");
+  const [email, setEmail] = useState("demo@example.com");
   const [password, setPassword] = useState("asdfg");
 
   const { isAuthenticated, login } = useAuth();
@@ -17,7 +16,7 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     if (email && password) {
-      login(email, password);
+      login(email, password); // 是否要加收 login 的回傳值
     }
   }
 

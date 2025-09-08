@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import axios from "../utils/axiosInstance";
 
 const AuthContext = createContext();
 
@@ -16,12 +17,12 @@ function reducer(state, action) {
 }
 
 // TODO: Replace with real login API
-const FAKE_USER = {
-  name: "Ann",
-  email: "ann@example.com",
-  password: "asdfg",
-  avatar: "https://i.pravatar.cc/100?img=31",
-};
+// const FAKE_USER = {
+//   name: "Ann",
+//   email: "ann@example.com",
+//   password: "asdfg",
+//   avatar: "https://i.pravatar.cc/100?img=31",
+// };
 
 function AuthProvider({ children }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
@@ -30,19 +31,25 @@ function AuthProvider({ children }) {
   );
 
   // mock API call
-  function getFakeUser(email, password) {
-    return email === FAKE_USER.email && password === FAKE_USER.password
-      ? FAKE_USER
-      : null;
-  }
+  // function getFakeUser(email, password) {
+  //   return email === FAKE_USER.email && password === FAKE_USER.password
+  //     ? FAKE_USER
+  //     : null;
+  // }
 
-  function login(email, password) {
-    // mock API call
-    const user = getFakeUser(email, password);
-    if (user) {
+  async function login(email, password) {
+    try {
+      const res = await axios.post("/users/login", { email, password });
+      const user = res.data;
       dispatch({ type: "login", payload: user });
+      return { success: true };
+    } catch (error) {
+      const message =
+        error.response?.data?.message || "Login failed. Please try again.";
+      return { success: false, message };
     }
   }
+
   function logout() {
     dispatch({ type: "logout" });
   }
