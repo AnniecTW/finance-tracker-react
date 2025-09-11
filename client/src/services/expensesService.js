@@ -33,6 +33,17 @@ export async function deleteExpenseById(id) {
   }
 }
 
+// Update expense by id from backend
+export async function updateExpenseById(id, updatedExpense) {
+  try {
+    const res = await axios.put(`/expenses/update/${id}`, updatedExpense);
+    return res.data;
+  } catch (err) {
+    console.error("Failed to update expense: ", err);
+    throw err;
+  }
+}
+
 // Get today's expenses from backend
 export async function fetchTodaysExpenses() {
   try {

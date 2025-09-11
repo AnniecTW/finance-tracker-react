@@ -1,7 +1,7 @@
-import { useExpenses } from "../../../contexts/ExpensesContext";
+import { useAllExpenses } from "../../../hooks/useAllExpenses";
 
 function TotalAmount() {
-  const { allExpenses } = useExpenses();
+  const { data: allExpenses = [] } = useAllExpenses();
   const totalAmount = allExpenses.reduce(
     (sum, expense) => sum + Number(expense.amount),
     0

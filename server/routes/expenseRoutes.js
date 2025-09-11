@@ -47,11 +47,26 @@ router.delete("/expenses/delete/:id", async (req, res) => {
   }
 });
 
+// Update an expense by ID
+router.put("/expenses/update/:id", async (req, res) => {
+  const { id } = req.params;
+  const { item, amount } = req.body;
+  try {
+    const result = await pool.query(
+      "UPDATE transactions SET item = $1, amount = $2 WHERE id = $3 AND user_id = $4 RETURNING *",
+      [item, amount, id, user_id]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Get today's expenses
 router.get("/expenses/today", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT * FROM transactions WHERE user_id = $1 AND DATE(date) = CURRENT_DATE",
+      "SELECT * FROM transactions WHERE user_id = $1 AND date >= CURRENT_DATE AND date < CURRENT_DATE + INTERVAL '1 day'",
       [user_id]
     );
     res.json(result.rows);
@@ -64,7 +79,7 @@ router.get("/expenses/today", async (req, res) => {
 router.get("/expenses/week", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT * FROM transactions WHERE user_id = $1 AND DATE(date) >= date_trunc('week', CURRENT_DATE)",
+      "SELECT * FROM transactions WHERE user_id = $1 AND date >= date_trunc('week', CURRENT_DATE) AND date < date_trunc('week', CURRENT_DATE) + INTERVAL '7 days'",
       [user_id]
     );
     res.json(result.rows);
@@ -77,7 +92,7 @@ router.get("/expenses/week", async (req, res) => {
 router.get("/expenses/month", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT * FROM transactions WHERE user_id = $1 AND DATE(date) >= date_trunc('month', CURRENT_DATE)",
+      "SELECT * FROM transactions WHERE user_id = $1 AND date >= date_trunc('month', CURRENT_DATE) AND date < date_trunc('month', CURRENT_DATE) + INTERVAL '1 month'",
       [user_id]
     );
     res.json(result.rows);
@@ -90,7 +105,7 @@ router.get("/expenses/month", async (req, res) => {
 router.get("/expenses/year", async (req, res) => {
   try {
     const result = await pool.query(
-      "SELECT * FROM transactions WHERE user_id = $1 AND DATE(date) >= date_trunc('year', CURRENT_DATE)",
+      "SELECT * FROM transactions WHERE user_id = $1 AND date >= date_trunc('year', CURRENT_DATE) AND date < date_trunc('year', CURRENT_DATE) + INTERVAL '1 year'",
       [user_id]
     );
     res.json(result.rows);

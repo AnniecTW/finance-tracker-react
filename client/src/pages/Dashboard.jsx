@@ -1,20 +1,12 @@
 import { Link } from "react-router-dom";
 import { useExpenses } from "../contexts/ExpensesContext";
+import { useAllExpenses } from "../hooks/useAllExpenses";
 import styles from "./Dashboard.module.css";
 
 function Dashboard() {
-  const {
-    allExpenses,
-    todayExpenses,
-    weekExpenses,
-    monthExpenses,
-    yearExpenses,
-  } = useExpenses();
-  console.log("All expenses in Dashboard:", allExpenses);
-  console.log("Today expenses in Dashboard:", todayExpenses);
-  console.log("Week expenses in Dashboard:", weekExpenses);
-  console.log("Month expenses in Dashboard:", monthExpenses);
-  console.log("Year expenses in Dashboard:", yearExpenses);
+  const { data: allExpenses = [] } = useAllExpenses();
+  const { todayExpenses, weekExpenses, monthExpenses, yearExpenses } =
+    useExpenses();
 
   function totalAmount(expenses) {
     return expenses.reduce((sum, expenses) => sum + Number(expenses.amount), 0);

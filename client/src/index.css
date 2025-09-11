@@ -141,6 +141,10 @@ input:focus {
   border: 1px solid var(--clr-btn);
 }
 
+.editform input {
+  width: 70%;
+}
+
 form .button {
   margin-top: 1rem;
   grid-column: 2;
