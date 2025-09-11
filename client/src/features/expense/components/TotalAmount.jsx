@@ -1,4 +1,4 @@
-import { useExpenses } from "../contexts/ExpensesContext";
+import { useExpenses } from "../../../contexts/ExpensesContext";
 
 function TotalAmount() {
   const { allExpenses } = useExpenses();

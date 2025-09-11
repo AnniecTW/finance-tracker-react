@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import User from "./user";
+import User from "../user/components/User";
 
 function PageNav() {
   return (

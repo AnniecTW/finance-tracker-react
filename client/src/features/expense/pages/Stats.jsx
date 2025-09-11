@@ -1,4 +1,4 @@
-import PageNav from "../components/PageNav";
+import PageNav from "../../ui/PageNav";
 
 function Stats() {
   return (

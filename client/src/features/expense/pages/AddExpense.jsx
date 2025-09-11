@@ -1,7 +1,7 @@
-import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
+import Button from "../../ui/Button";
+/* import { useNavigate } from "react-router-dom"; */
 import { useState } from "react";
-import { useExpenses } from "../contexts/ExpensesContext";
+import { useExpenses } from "../../../contexts/ExpensesContext";
 
 function AddExpense() {
   const { handleAddExpense: onAddExpense } = useExpenses();
@@ -9,7 +9,7 @@ function AddExpense() {
   const [item, setItem] = useState("");
   const [amount, setAmount] = useState("");
 
-  const navigate = useNavigate();
+  /* const navigate = useNavigate(); */
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -26,7 +26,7 @@ function AddExpense() {
 
     setItem("");
     setAmount("");
-    navigate(-1);
+    /* navigate(-1); */
   }
   return (
     <main>

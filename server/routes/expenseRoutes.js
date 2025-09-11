@@ -99,4 +99,18 @@ router.get("/expenses/year", async (req, res) => {
   }
 });
 
+// Get single expense by ID
+router.get("/expenses/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "SELECT * FROM transactions WHERE id = $1 AND user_id = $2",
+      [id, user_id]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 export default router;

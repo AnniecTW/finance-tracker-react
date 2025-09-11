@@ -1,6 +1,6 @@
-import axios from "./utils/axiosInstance";
+import axios from "../utils/axiosInstance";
 
-// get all expenses from backend
+// Get all expenses from backend
 export async function fetchAllExpenses() {
   try {
     const res = await axios.get("/expenses/getAll");
@@ -11,7 +11,7 @@ export async function fetchAllExpenses() {
   }
 }
 
-// add new expense to backend
+// Add new expense to backend
 export async function addExpenses(expenses) {
   try {
     const res = await axios.post("/expenses/add", expenses);
@@ -22,7 +22,7 @@ export async function addExpenses(expenses) {
   }
 }
 
-// delete expense by id from backend
+// Delete expense by id from backend
 export async function deleteExpenseById(id) {
   try {
     const res = await axios.delete(`/expenses/delete/${id}`);
@@ -33,7 +33,7 @@ export async function deleteExpenseById(id) {
   }
 }
 
-// get today's expenses from backend
+// Get today's expenses from backend
 export async function fetchTodaysExpenses() {
   try {
     const res = await axios.get("/expenses/today");
@@ -44,7 +44,7 @@ export async function fetchTodaysExpenses() {
   }
 }
 
-// get this week's expenses from backend
+// Get this week's expenses from backend
 export async function fetchWeeksExpenses() {
   try {
     const res = await axios.get("/expenses/week");
@@ -55,7 +55,7 @@ export async function fetchWeeksExpenses() {
   }
 }
 
-// get this month's expenses from backend
+// Get this month's expenses from backend
 export async function fetchMonthsExpenses() {
   try {
     const res = await axios.get("/expenses/month");
@@ -66,13 +66,24 @@ export async function fetchMonthsExpenses() {
   }
 }
 
-// get this year's expenses from backend
+// Get this year's expenses from backend
 export async function fetchYearsExpenses() {
   try {
     const res = await axios.get("/expenses/year");
     return res.data;
   } catch (err) {
     console.error("Failed to fetch year's expenses: ", err);
+    throw err;
+  }
+}
+
+// Get single expense by id from backend
+export async function fetchExpenseById(id) {
+  try {
+    const res = await axios.get(`expenses/${id}`);
+    return res.data;
+  } catch (err) {
+    console.error("Failed to fetch expense: ", err);
     throw err;
   }
 }

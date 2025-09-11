@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../contexts/FakeAuthContext";
+import { useAuth } from "../../../contexts/FakeAuthContext";
 import { useNavigate } from "react-router-dom";
 
-import Button from "../components/Button";
+import Button from "../../ui/Button";
 
 function Login() {
   // Pre-fill for dev purpose

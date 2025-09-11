@@ -2,19 +2,20 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ExpensesProvider } from "./contexts/ExpensesContext";
 import { AuthProvider } from "./contexts/FakeAuthContext";
-import ProtectedRoute from "./pages/ProtectedRoute";
+import ProtectedRoute from "./features/user/pages/ProtectedRoute";
 
-import AddExpense from "./pages/AddExpense";
+import AddExpendrse from "./features/expense/pages/AddExpense";
 import Dashboard from "./pages/Dashboard";
-import ExpenseList from "./pages/ExpenseList";
-import Expense from "./components/Expense";
-import Stats from "./pages/Stats";
-import SpinnerFullPage from "./components/SpinnerFullPage";
+import ExpenseList from "./features/expense/pages/ExpenseList";
+import Expense from "./features/expense/components/Expense";
+import Stats from "./features/expense/pages/Stats";
+import Spinner from "./features/ui/Spinner";
+import SpinnerFullPage from "./features/ui/SpinnerFullPage";
 
-const Homepage = lazy(() => import("./pages/Homepage"));
-const Login = lazy(() => import("./pages/Login"));
-const Signup = lazy(() => import("./pages/Signup"));
-const AppLayout = lazy(() => import("./pages/AppLayout"));
+const Homepage = lazy(() => import("./features/home/pages/Homepage"));
+const Login = lazy(() => import("./features/user/pages/Login"));
+const Signup = lazy(() => import("./features/user/pages/Signup"));
+const AppLayout = lazy(() => import("./layouts/AppLayout"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
                 }
               >
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/add" element={<AddExpense />} />
+                <Route path="/add" element={<AddExpendrse />} />
                 <Route path="/expenses" element={<ExpenseList />}>
                   <Route path=":id" element={<Expense />} />
                 </Route>

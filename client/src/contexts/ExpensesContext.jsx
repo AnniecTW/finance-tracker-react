@@ -7,7 +7,7 @@ import {
   fetchWeeksExpenses,
   fetchMonthsExpenses,
   fetchYearsExpenses,
-} from "../expensesService";
+} from "../services/expensesService";
 // const initialExpenses = [
 //   { id: 1, item: "Lunch", amount: 200 },
 //   { id: 2, item: "Coffee", amount: 80 },
@@ -84,6 +84,7 @@ function ExpensesProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
+  // Custom hook to fetch and set overview data
   function useOverview(fetchFn, actionType) {
     useEffect(() => {
       async function loadOverview() {
