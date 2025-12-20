@@ -1,0 +1,350 @@
+:root {
+  --clr-btn: #ffddae;
+  --clr-hl: #d4f6ff;
+  --clr-bg-1: #fbfbfb;
+  --clr-bg-2: #c6e7ff;
+  --spinner-color: #333;
+  --clr-err: #cc0000;
+  --clr-text: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  color: #495057;
+  font-size: 2rem;
+  line-height: 1.6;
+}
+
+.layout {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 200px 0 40px 0;
+  background: #f7f7f7;
+}
+
+section {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  min-width: 340px;
+}
+
+.button {
+  background-color: var(--clr-bg-1);
+  color: #343a40;
+  font-size: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--clr-btn);
+}
+
+.btn-group {
+  grid-column: 1 / span 2;
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
+}
+
+.expensesContainer {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  justify-content: center;
+}
+
+.list {
+  list-style: none;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 2rem;
+  border-right: 1px solid #ccc;
+  padding-right: 1rem;
+}
+
+.expenseItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1.2rem;
+  border-radius: 7px;
+  transition: 0.5s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.expenseItem:hover {
+  background-color: #f0f0f0;
+}
+
+.total-amount {
+  margin: 6rem 0;
+  font-size: 2.2rem;
+}
+
+/* Form */
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  background-color: var(--clr-bg-2);
+  border-radius: 7px;
+  padding: 1.2rem;
+  max-width: 1000px;
+}
+
+form h2 {
+  grid-column: 1 / -1;
+}
+
+.form-row {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.7fr 1fr 1fr;
+  column-gap: 1rem;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    row-gap: 0.5rem;
+    min-width: 500px;
+  }
+
+  .error {
+    justify-self: start;
+  }
+}
+
+input {
+  color: inherit;
+  font-size: 2rem;
+  padding: 0.7rem;
+  text-align: center;
+  border: 1px solid var(--clr-hl);
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--clr-btn);
+}
+
+.error {
+  font-size: 0.8 rem;
+  color: var(--clr-err);
+}
+
+.editform input {
+  width: 70%;
+}
+
+form .button {
+  margin-top: 1rem;
+  justify-self: end;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 2rem;
+}
+
+/* file input */
+
+.file-input {
+  font-size: 1.4rem;
+  border: none;
+  padding-left: 7%;
+}
+
+@media (max-width: 768px) {
+  .file-input {
+    padding-left: 0;
+  }
+}
+
+.file-input::file-selector-button {
+  font: inherit;
+  font-weight: 500;
+  padding: 0.8rem 1.2rem;
+  margin-right: 1.2rem;
+  border-radius: 7px;
+  border: none;
+  color: var(--color-brand-50);
+  background-color: var(--clr-bg-1);
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.file-input::file-selector-button:hover {
+  background-color: var(--clr-btn);
+}
+
+/* PageNav */
+nav ul {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+.navLink {
+  text-decoration: none;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
+
+/* Nav: User */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 15px 0;
+  justify-content: flex-end;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* expense detail */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+/* disable */
+button:disabled,
+input:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* add expense */
+.expenseContainer {
+  text-align: center;
+}
+
+/* Login */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 4rem;
+}
+
+.login-container,
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.5rem;
+  width: 600px;
+  text-align: center;
+}
+
+.signup-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form,
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--clr-bg-2), var(--clr-hl));
+}
+
+form.signup-form {
+  width: 100%;
+  max-width: 1400px;
+}
+
+.signup-form .form-row {
+  grid-template-columns: 1.5fr 1fr 1.2fr;
+}
+
+.login-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 90%;
+}
+
+.login-form input,
+.signup-form input {
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 0.8rem;
+  outline: none;
+  background-color: #fff;
+  transition: 0.2s ease;
+  width: 100%;
+}
+
+.login-form input:focus,
+.signup-form input:focus {
+  border-color: var(--clr-bg-2);
+  background-color: var(--clr-bg-1);
+}
+
+.login-form .error-msg,
+.signup-form .error-msg {
+  color: var(--clr-err);
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+}
