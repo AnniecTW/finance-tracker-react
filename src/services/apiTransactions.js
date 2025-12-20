@@ -1,7 +1,10 @@
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getAllExpenses() {
-  const { data, error } = await supabase.from("transactions").select("*");
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .order("created_at", { ascending: false });
   if (error) {
     console.error(error);
     throw new Error("Transactions could not be loaded");
@@ -10,6 +13,7 @@ export async function getAllExpenses() {
   return data;
 }
 
+// Delete expense by id
 export async function deleteExpenseById(id) {
   const { data, error } = await supabase
     .from("transactions")
@@ -25,6 +29,7 @@ export async function deleteExpenseById(id) {
   return data;
 }
 
+// Retrieve expense by id
 export async function getExpenseById(id) {
   const { data, error } = await supabase
     .from("transactions")
@@ -40,6 +45,7 @@ export async function getExpenseById(id) {
   return data;
 }
 
+//  Add new expense or update expense by id
 export async function addEditExpense({ id, ...newExpense }) {
   let imageUrl = null;
 

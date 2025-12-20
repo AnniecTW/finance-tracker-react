@@ -1,45 +1,74 @@
 import { Link } from "react-router-dom";
-// import { useExpenses } from "../contexts/ExpensesContext";
+import { useMemo } from "react";
 import { useAllExpenses } from "../features/expense/useExpenses";
-import styles from "./Dashboard.module.css";
+
 import Spinner from "../features/ui/Spinner";
+import styles from "./Dashboard.module.css";
+
+import {
+  isSameDay,
+  isSameWeek,
+  isSameMonth,
+  isSameYear,
+  parseISO,
+} from "date-fns";
 
 function Dashboard() {
-  // const { todayExpenses, weekExpenses, monthExpenses, yearExpenses } = useExpenses();
   const { data: allExpenses = [], isLoading, error } = useAllExpenses();
+
+  const totals = useMemo(() => {
+    const now = new Date();
+
+    return allExpenses.reduce(
+      (acc, expense) => {
+        const expenseDate = parseISO(expense.created_at);
+        const amount = Number(expense.amount);
+
+        acc.all += amount;
+        if (isSameYear(expenseDate, now)) {
+          acc.year += amount;
+
+          if (isSameMonth(expenseDate, now)) {
+            acc.month += amount;
+
+            if (isSameDay(expenseDate, now)) {
+              acc.today += amount;
+            }
+          }
+        }
+
+        if (isSameWeek(expenseDate, now, { weekStartsOn: 1 })) {
+          acc.week += amount;
+        }
+
+        return acc;
+      },
+      { all: 0, year: 0, month: 0, week: 0, today: 0 }
+    );
+  }, [allExpenses]);
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  function totalAmount(expenses) {
-    return expenses.reduce((sum, expenses) => sum + Number(expenses.amount), 0);
-  }
-
-  const AllAmount = totalAmount(allExpenses);
-  // const TodayAmount = totalAmount(todayExpenses);
-  // const WeekAmount = totalAmount(weekExpenses);
-  // const MonthAmount = totalAmount(monthExpenses);
-  // const YearAmount = totalAmount(yearExpenses);
-
   return (
     <section>
       <h2 className={styles.sumTitle}>Summary</h2>
       <div className={styles.para}>
-        <strong>Total Spent:</strong> <span>${AllAmount}</span>
+        <strong>Total Spent:</strong> <span>${totals.all}</span>
         <strong>Remaining Budget:</strong> <span>$</span>
       </div>
 
-      {/* <div className={styles.para}>
+      <div className={styles.para}>
         <h5 className={styles.subSumTitle}>Today:</h5>{" "}
-        <span className={styles.span}>${TodayAmount}</span>
+        <span className={styles.span}>${totals.today}</span>
         <h5 className={styles.subSumTitle}>This Week:</h5>{" "}
-        <span className={styles.span}>${WeekAmount}</span>
+        <span className={styles.span}>${totals.week}</span>
         <h5 className={styles.subSumTitle}>This Month:</h5>{" "}
-        <span className={styles.span}>${MonthAmount}</span>
+        <span className={styles.span}>${totals.month}</span>
         <h5 className={styles.subSumTitle}>This Year:</h5>{" "}
-        <span className={styles.span}>${YearAmount}</span>
-      </div> */}
+        <span className={styles.span}>${totals.year}</span>
+      </div>
 
       <div className={styles.link}>
         <Link to="/expenses" className="button">
