@@ -32,8 +32,9 @@ server/build/
 
 # Environment
 .env
-.env.*.local
+.env.*
 *.local
+!.env.example
 
 # Ignore client & server outputs
 client/dist/
