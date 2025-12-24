@@ -15,13 +15,9 @@ function ExpenseForm({
   const { errors } = formState;
 
   function handleFormSubmit(data) {
-    let imageValue = null;
+    const hasNewImage = data.image instanceof FileList && data.image.length > 0;
+    const imageValue = hasNewImage ? data.image[0] : data.image;
 
-    if (data.image instanceof FileList && data.image.length > 0) {
-      imageValue = data.image[0];
-    } else {
-      imageValue = null;
-    }
     onSubmit({
       ...data,
       amount: Number(data.amount),
