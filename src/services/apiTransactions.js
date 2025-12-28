@@ -5,9 +5,26 @@ export async function getAllExpenses() {
     .from("transactions")
     .select("*")
     .order("created_at", { ascending: false });
+
   if (error) {
     console.error(error);
     throw new Error("Transactions could not be loaded");
+  }
+
+  return data;
+}
+
+// Get the latest 50 expenses
+export async function getRecentExpenses() {
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Could not load recent transactions");
   }
 
   return data;
@@ -78,10 +95,13 @@ export async function addEditExpense({ id, ...newExpense }) {
   }
 
   let query = supabase.from("transactions");
+
+  const { item, amount, category, userID } = newExpense;
   const payload = {
-    item: newExpense.item,
-    amount: newExpense.amount,
-    userID: newExpense.userID,
+    item,
+    amount,
+    category,
+    userID,
     image: imageUrl,
   };
 

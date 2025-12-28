@@ -1,9 +1,11 @@
+import styles from "./FormRow.module.css";
+
 function FormRow({ label, error, children }) {
   return (
-    <div className="form-row">
+    <div className={styles.formRow}>
       {label && <label htmlFor={children.props.id}>{label}</label>}
       {children}
-      {error && <span className="error">{error}</span>}
+      {error && <span className={styles.error}>{error}</span>}
     </div>
   );
 }
