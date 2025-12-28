@@ -1,6 +1,18 @@
 import { useForm } from "react-hook-form";
+import { useEffect, useMemo } from "react";
+import { useRecentExpenses } from "../useExpenses";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
+import styles from "./ExpenseForm.module.css";
+
+const CATEGORIES = [
+  "Food",
+  "Transport",
+  "Housing",
+  "Entertainment",
+  "Health",
+  "Other",
+];
 
 function ExpenseForm({
   onSubmit,
@@ -9,10 +21,51 @@ function ExpenseForm({
   submitLabel = "Save",
   onCancel,
 }) {
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { data: recentExpenses = [] } = useRecentExpenses();
+
+  const recentExpensesSlice = useMemo(() => {
+    return recentExpenses.slice(0, 20);
+  }, [recentExpenses]);
+
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    getValues,
+    setValue,
+    watch,
+  } = useForm({
     defaultValues,
   });
   const { errors } = formState;
+
+  const watchedItem = watch("item");
+
+  // Smart default
+  useEffect(() => {
+    if (submitLabel === "Add" && watchedItem && watchedItem.length >= 3) {
+      const match = recentExpensesSlice.find((ex) => {
+        const historyItem = ex.item.trim().toLowerCase();
+        const currentInput = watchedItem.trim().toLowerCase();
+
+        const historyHasInput = historyItem.includes(currentInput);
+        const inputHasHistory = currentInput.includes(historyItem);
+
+        return historyHasInput || inputHasHistory;
+      });
+
+      if (match && CATEGORIES.includes(match.category)) {
+        const currentCatValue = getValues("category");
+        if (currentCatValue !== match.category) {
+          setValue("category", match.category, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+        }
+      }
+    }
+  }, [watchedItem, getValues, setValue, recentExpensesSlice, submitLabel]);
 
   function handleFormSubmit(data) {
     const hasNewImage = data.image instanceof FileList && data.image.length > 0;
@@ -30,19 +83,25 @@ function ExpenseForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="expense-form">
+    <form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className={styles.formContainer}
+    >
       <FormRow label="Item" error={errors?.item?.message}>
         <input
           type="text"
           id="item"
+          className={styles.input}
           disabled={isSubmitting}
           {...register("item", { required: "This field is required" })}
         />
       </FormRow>
       <FormRow label="Amount" error={errors?.amount?.message}>
         <input
-          type="text"
+          type="number"
           id="amount"
+          min="0"
+          className={styles.input}
           disabled={isSubmitting}
           {...register("amount", {
             required: "This field is required",
@@ -51,19 +110,35 @@ function ExpenseForm({
               message: "Amount is out of limit",
             },
           })}
+          onWheel={(e) => e.target.blur()}
         />
+      </FormRow>
+      <FormRow label="Category" error={errors?.category?.message}>
+        <select
+          id="category"
+          disabled={isSubmitting}
+          {...register("category", { required: "Please select a category" })}
+          className={styles.selectInput}
+        >
+          <option value="">Select a category...</option>
+          {CATEGORIES.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
       </FormRow>
       <FormRow label="Photo" error={errors?.image?.message}>
         <input
           id="image"
           accept="image/*"
           type="file"
-          className="file-input"
+          className={styles.fileInput}
           disabled={isSubmitting}
           {...register("image")}
         />
       </FormRow>
-      <div className="form-buttons">
+      <div className={styles.formButtons}>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Saving..." : submitLabel}
         </Button>

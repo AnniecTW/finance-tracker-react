@@ -1,0 +1,82 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  background-color: var(--clr-bg-2);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  align-items: flex-start;
+}
+
+/* Input & Select */
+.input,
+.selectInput {
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.6rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--clr-hl);
+  border-radius: 6px;
+  background-color: var(--clr-bg-1);
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.input:focus,
+.selectInput:focus {
+  outline: none;
+  border-color: var(--clr-btn);
+  box-shadow: 0 0 0 3px rgba(var(--clr-btn-rgb), 0.1);
+}
+
+.selectInput {
+  cursor: pointer;
+  padding-right: 3.5rem;
+}
+
+.fileInput {
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: none;
+}
+
+.fileInput::file-selector-button {
+  font-family: inherit;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  margin-right: 1.2rem;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--clr-hl);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fileInput::file-selector-button:hover {
+  background-color: var(--clr-btn);
+}
+
+.formButtons {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem;
+    align-items: center;
+  }
+
+  .input,
+  .selectInput {
+    font-size: 1.4rem;
+  }
+}

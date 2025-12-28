@@ -49,6 +49,7 @@ function Expense() {
         <div className="detail">
           <strong>Item:</strong> <span>{expense.item}</span>
           <strong>Amount:</strong> <span>${expense.amount}</span>
+          <strong>Category:</strong> <span>{expense.category}</span>
           <strong>Photo</strong>
           <img
             src={
