@@ -3,6 +3,7 @@ import { useSignup } from "../useSignup";
 import { Link } from "react-router-dom";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
+import styles from "./Signup.module.css";
 
 function Signup() {
   const { signup, isLoading } = useSignup();
@@ -14,23 +15,32 @@ function Signup() {
   }
 
   return (
-    <div className="signup-container">
+    <div className={styles.signupContainer}>
       <h1>Create a new user</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
-        <FormRow label="Full name" error={errors?.fullName?.message}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.signupForm}>
+        <FormRow
+          label="Full name"
+          error={errors?.fullName?.message}
+          className={styles.signupRow}
+        >
           <input
             type="text"
             id="fullName"
-            disable={isLoading}
+            disabled={isLoading}
             {...register("fullName", { required: "This field is required" })}
           />
         </FormRow>
 
-        <FormRow label="Email address" error={errors?.email?.message}>
+        <FormRow
+          label="Email address"
+          error={errors?.email?.message}
+          className={styles.signupRow}
+        >
           <input
             type="text"
             id="email"
-            disable={isLoading}
+            autoComplete="email"
+            disabled={isLoading}
             {...register("email", {
               required: "This field is required",
               pattern: {
@@ -44,11 +54,12 @@ function Signup() {
         <FormRow
           label="Password (min 8 characters)"
           error={errors?.password?.message}
+          className={styles.signupRow}
         >
           <input
             type="password"
             id="password"
-            disable={isLoading}
+            disabled={isLoading}
             {...register("password", {
               required: "This field is required",
               minLength: {
@@ -62,6 +73,7 @@ function Signup() {
         <FormRow
           label="Repeat password"
           error={errors?.passwordConfirm?.message}
+          className={styles.signupRow}
         >
           <input
             type="password"

@@ -59,6 +59,9 @@ function Expense() {
             }
             alt="expense"
             width="150px"
+            onError={(e) => {
+              e.target.src = "/no-photo.jpg";
+            }}
           />
           <div className="btn-group">
             <Button onClick={handleDuplicate} disabled={isAdding}>

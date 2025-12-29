@@ -171,78 +171,35 @@ input:disabled {
   text-align: center;
 }
 
-/* Login */
-.login-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 4rem;
-}
-
-.login-container,
-.signup-container {
-  display: flex;
-  flex-direction: column;
-  border-radius: 1.5rem;
-  width: 600px;
-  text-align: center;
-}
-
-.signup-container {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-form,
-.signup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  background: linear-gradient(135deg, var(--clr-bg-2), var(--clr-hl));
-}
-
-form.signup-form {
-  width: 100%;
-  max-width: 1400px;
-}
-
-.signup-form .form-row {
-  grid-template-columns: 1.5fr 1fr 1.2fr;
-}
-
-.login-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 90%;
-}
-
-.login-form input,
-.signup-form input {
-  padding: 0.8rem 1rem;
-  border: 1.5px solid #ddd;
-  border-radius: 0.8rem;
-  outline: none;
-  background-color: #fff;
-  transition: 0.2s ease;
-  width: 100%;
-}
-
-.login-form input:focus,
-.signup-form input:focus {
-  border-color: var(--clr-bg-2);
+/* Input & Select */
+input,
+select {
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.6rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid var(--clr-hl);
+  border-radius: 6px;
   background-color: var(--clr-bg-1);
+  transition: all 0.2s;
+  width: 100%;
 }
 
-.login-form .error-msg,
-.signup-form .error-msg {
-  color: var(--clr-err);
-  font-size: 0.9rem;
-  margin-top: -0.5rem;
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--clr-btn);
+  box-shadow: 0 0 0 3px rgba(var(--clr-btn-rgb), 0.1);
+}
+
+select {
+  cursor: pointer;
+  padding-right: 3.5rem;
+}
+
+@media (max-width: 768px) {
+  input,
+  select {
+    font-size: 1.4rem;
+  }
 }
