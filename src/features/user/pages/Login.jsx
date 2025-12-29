@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLogin } from "../useLogin";
 import { Link } from "react-router-dom";
-
 import Button from "../../ui/Button";
+import styles from "./Login.module.css";
 
 function Login() {
   // Pre-fill for dev purpose
@@ -19,11 +19,11 @@ function Login() {
   }
 
   return (
-    <div className="login-page">
+    <div className={styles.loginPage}>
       <h3>Log in to your account</h3>
-      <main className="login-container">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <div className="login-row">
+      <main className={styles.loginContainer}>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <div className={styles.loginRow}>
             <label htmlFor="email">Email address</label>
             <input
               type="email"
@@ -34,7 +34,7 @@ function Login() {
               disabled={isLoading}
             ></input>
           </div>
-          <div className="login-row">
+          <div className={styles.loginRow}>
             <label htmlFor="password">Password</label>
             <input
               type="password"

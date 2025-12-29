@@ -64,37 +64,43 @@ export async function getExpenseById(id) {
 
 //  Add new expense or update expense by id
 export async function addEditExpense({ id, ...newExpense }) {
+  const imageField = newExpense.image; // File, FileList, or URL
+
+  const isNewFile =
+    imageField instanceof File ||
+    (imageField instanceof FileList && imageField.length > 0);
+
+  const hasImagePath =
+    typeof imageField === "string" &&
+    imageField.startsWith(
+      `${supabaseUrl}/storage/v1/object/public/transaction-images`
+    );
+
   let imageUrl = null;
 
-  const hasImagePath = newExpense.image?.startsWith?.(
-    `${supabaseUrl}/storage/v1/object/public/transaction-images`
-  );
-  // image deleted
-  if (!newExpense.image) {
-    imageUrl = null;
-
+  if (isNewFile) {
     // new image uploaded
-  } else if (!hasImagePath) {
-    const imageName = `${Math.random()}-${
-      newExpense.image?.name ?? ""
-    }`.replaceAll("/", "");
+    const file = imageField instanceof FileList ? imageField[0] : imageField;
+    const imageName = `${Math.random()}-${file.name}`.replaceAll("/", "");
+
     const { error: uploadError } = await supabase.storage
       .from("transaction-images")
-      .upload(imageName, newExpense.image);
+      .upload(imageName, file);
 
     if (uploadError) throw new Error("Image upload failed");
 
     const { data: publicData } = supabase.storage
       .from("transaction-images")
       .getPublicUrl(imageName);
-    imageUrl = publicData?.publicUrl ?? null;
 
-    // image unchaged
+    imageUrl = publicData.publicUrl;
+  } else if (hasImagePath) {
+    // image unchanged
+    imageUrl = imageField;
   } else {
-    imageUrl = newExpense.image ?? null;
+    // image deleted or no image uploaded
+    imageUrl = null;
   }
-
-  let query = supabase.from("transactions");
 
   const { item, amount, category, userID } = newExpense;
   const payload = {
@@ -105,12 +111,14 @@ export async function addEditExpense({ id, ...newExpense }) {
     image: imageUrl,
   };
 
+  let query = supabase.from("transactions");
+
   if (!id) query = query.insert([payload]); // CREATE
   else query = query.update(payload).eq("id", id); // EDIT
 
   const { data, error } = await query.select();
 
-  if (error) throw new Error("Transaction could not be created or updated");
+  if (error) throw new Error("Transaction could not be saved");
 
   return data;
 }

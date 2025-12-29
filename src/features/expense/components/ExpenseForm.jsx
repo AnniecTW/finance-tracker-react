@@ -68,7 +68,9 @@ function ExpenseForm({
   }, [watchedItem, getValues, setValue, recentExpensesSlice, submitLabel]);
 
   function handleFormSubmit(data) {
-    const hasNewImage = data.image instanceof FileList && data.image.length > 0;
+    const hasNewImage =
+      data.image instanceof File ||
+      (data.image instanceof FileList && data.image.length > 0);
     const imageValue = hasNewImage ? data.image[0] : data.image;
 
     onSubmit({
