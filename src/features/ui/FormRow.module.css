@@ -1,6 +1,6 @@
 .formRow {
   display: grid;
-  align-items: center;
+  align-items: flex-start;
   text-align: left;
   grid-template-columns: 120px 1.5fr 1fr;
   column-gap: 2rem;

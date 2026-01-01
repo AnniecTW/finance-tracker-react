@@ -41,6 +41,11 @@ function ExpenseForm({
   const { errors } = formState;
 
   const watchedItem = watch("item");
+  const currentImage = watch("image");
+
+  const handleRemoveImage = () => {
+    setValue("image", null);
+  };
 
   // Smart default
   useEffect(() => {
@@ -130,15 +135,29 @@ function ExpenseForm({
           ))}
         </select>
       </FormRow>
-      <FormRow label="Photo" error={errors?.image?.message}>
-        <input
-          id="image"
-          accept="image/*"
-          type="file"
-          className={styles.fileInput}
-          disabled={isSubmitting}
-          {...register("image")}
-        />
+      <FormRow label="Photo" error={errors?.image?.message} id="image">
+        <div className={styles.fileInputContainer}>
+          <input
+            id="image"
+            accept="image/*"
+            type="file"
+            className={styles.fileInput}
+            disabled={isSubmitting}
+            {...register("image")}
+          />
+          {currentImage && (
+            <div className={styles.imageStatus}>
+              <span className={styles.statusText}>
+                {typeof currentImage === "string"
+                  ? "Existing Image"
+                  : "New Image Selected"}
+              </span>
+              <Button onClick={handleRemoveImage} className={styles.deleteBtn}>
+                Remove
+              </Button>
+            </div>
+          )}
+        </div>
       </FormRow>
       <div className={styles.formButtons}>
         <Button type="submit" disabled={isSubmitting}>
