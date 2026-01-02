@@ -108,21 +108,6 @@ section {
   font-size: 2.2rem;
 }
 
-/* Nav: User */
-.user {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 15px 0;
-  justify-content: flex-end;
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
 /* expense detail */
 .detail {
   display: grid;

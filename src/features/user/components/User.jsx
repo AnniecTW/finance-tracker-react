@@ -4,6 +4,7 @@ import { useLogout } from "../useLogout";
 import { useNavigate } from "react-router-dom";
 import Button from "../../ui/Button";
 import UserAvatar from "./UserAvatar";
+import styles from "./User.module.css";
 
 function User() {
   const { user } = useUser();
@@ -11,7 +12,7 @@ function User() {
   const navigate = useNavigate();
 
   return (
-    <div className="user">
+    <div className={styles.userContainer}>
       <span>Welcom, {user.name}</span>
       <UserAvatar />
       <Button onClick={() => navigate("/account")}>
