@@ -108,31 +108,6 @@ section {
   font-size: 2.2rem;
 }
 
-/* PageNav */
-nav ul {
-  max-width: 1500px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav li {
-  list-style-type: none;
-}
-
-.navLink {
-  text-decoration: none;
-}
-
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-}
-
 /* Nav: User */
 .user {
   display: flex;

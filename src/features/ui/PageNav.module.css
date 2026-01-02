@@ -1,0 +1,23 @@
+.navList {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navItem {
+  list-style-type: none;
+}
+
+.navLink {
+  text-decoration: none;
+}
+
+.navContainer {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
