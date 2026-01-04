@@ -5,6 +5,7 @@ import { useDeleteExpense } from "../useDeleteExpense";
 import { useEditExpense } from "../useEditExpense";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useAddExpense } from "../useAddExpense";
+import styles from "./Expense.module.css";
 
 import Button from "../../ui/Button";
 import ExpenseForm from "./ExpenseForm";
@@ -35,7 +36,7 @@ function Expense() {
   if (!expense) return <div>No expense found.</div>;
 
   return (
-    <div className="expenseContainer">
+    <div className={styles.expenseContainer}>
       <h3>Expense Detail</h3>
       {isEditing ? (
         <ExpenseForm
@@ -46,7 +47,7 @@ function Expense() {
           onCancel={() => setIsEditing(false)}
         />
       ) : (
-        <div className="detail">
+        <div className={styles.detail}>
           <strong>Item:</strong> <span>{expense.item}</span>
           <strong>Amount:</strong> <span>${expense.amount}</span>
           <strong>Category:</strong> <span>{expense.category}</span>

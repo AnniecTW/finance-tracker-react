@@ -1,5 +1,6 @@
 :root {
   --clr-btn: #ffddae;
+  --clr-btn-rgb: 255, 221, 174;
   --clr-hl: #d4f6ff;
   --clr-bg-1: #fbfbfb;
   --clr-bg-2: #c6e7ff;
@@ -71,52 +72,6 @@ section {
   margin: 2rem;
 }
 
-.expensesContainer {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem;
-  justify-content: center;
-}
-
-.list {
-  list-style: none;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 2rem;
-  border-right: 1px solid #ccc;
-  padding-right: 1rem;
-}
-
-.expenseItem {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 1.2rem;
-  border-radius: 7px;
-  transition: 0.5s;
-  text-decoration: none;
-  color: inherit;
-}
-
-.expenseItem:hover {
-  background-color: #f0f0f0;
-}
-
-.total-amount {
-  margin: 6rem 0;
-  font-size: 2.2rem;
-}
-
-/* expense detail */
-.detail {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  align-items: center;
-  padding-left: 1rem;
-}
-
 /* disable */
 button:disabled,
 input:disabled {
@@ -124,11 +79,6 @@ input:disabled {
   color: #666;
   cursor: not-allowed;
   opacity: 0.6;
-}
-
-/* add expense */
-.expenseContainer {
-  text-align: center;
 }
 
 /* Input & Select */

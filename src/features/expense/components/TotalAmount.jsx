@@ -1,4 +1,5 @@
 import { useAllExpenses } from "../useExpenses";
+import styles from "../pages/ExpenseList.module.css";
 
 function TotalAmount() {
   const { data: allExpenses = [] } = useAllExpenses();
@@ -7,7 +8,7 @@ function TotalAmount() {
     0
   );
   return (
-    <li className="total-amount">
+    <li className={styles.totalAmount}>
       <strong>Total Amount 💰:</strong> <span>${totalAmount}</span>
     </li>
   );
