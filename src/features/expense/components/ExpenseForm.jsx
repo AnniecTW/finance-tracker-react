@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useMemo } from "react";
 import { useRecentExpenses } from "../useExpenses";
+import { useNavigate } from "react-router-dom";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
 import styles from "./ExpenseForm.module.css";
@@ -21,6 +22,7 @@ function ExpenseForm({
   submitLabel = "Save",
   onCancel,
 }) {
+  const navigate = useNavigate();
   const { data: recentExpenses = [] } = useRecentExpenses();
 
   const recentExpensesSlice = useMemo(() => {
@@ -88,6 +90,11 @@ function ExpenseForm({
       reset();
     }
   }
+
+  const handleCancel = () => {
+    if (onCancel) onCancel();
+    else navigate(-1);
+  };
 
   return (
     <form
@@ -163,7 +170,7 @@ function ExpenseForm({
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Saving..." : submitLabel}
         </Button>
-        {onCancel && <Button onClick={onCancel}>Cancel</Button>}
+        {<Button onClick={handleCancel}>Cancel</Button>}
       </div>
     </form>
   );

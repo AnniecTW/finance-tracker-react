@@ -1,33 +1,28 @@
 .sumTitle {
   margin-bottom: 18px;
+  text-align: center;
 }
 
 .para {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 8px 0;
-}
-
-.para span {
-  text-align: right;
-}
-
-div {
   margin: 18px 0 24px 0;
+}
+
+.span {
+  text-align: right;
+  color: #2d6cdf;
 }
 
 .subSumTitle {
   margin: 6px 0;
+  font-size: 1.6rem;
   font-weight: 500;
   color: #2d6cdf;
-}
-
-.para .span {
-  color: #2d6cdf;
-  font-size: 1.8rem;
 }
 
 .link {
   display: flex;
   justify-content: space-between;
+  margin: 18px 0 24px 0;
 }

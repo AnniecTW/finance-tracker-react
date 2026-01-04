@@ -11,7 +11,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 2rem;
   border-right: 1px solid #ccc;
   padding-right: 1rem;
 }
@@ -32,5 +31,5 @@
 
 .totalAmount {
   margin: 6rem 0;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
 }

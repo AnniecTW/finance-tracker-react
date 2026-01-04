@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { useMemo } from "react";
 import { useAllExpenses } from "../features/expense/useExpenses";
 
+import Button from "../features/ui/Button";
 import Spinner from "../features/ui/Spinner";
 import styles from "./Dashboard.module.css";
 
@@ -14,7 +14,7 @@ import {
 } from "date-fns";
 
 function Dashboard() {
-  const { data: allExpenses = [], isLoading, error } = useAllExpenses();
+  const { data: allExpenses = [], isLoading } = useAllExpenses();
 
   const totals = useMemo(() => {
     const now = new Date();
@@ -55,31 +55,27 @@ function Dashboard() {
     <section>
       <h2 className={styles.sumTitle}>Summary</h2>
       <div className={styles.para}>
-        <strong>Total Spent:</strong> <span>${totals.all}</span>
-        <strong>Remaining Budget:</strong> <span>$</span>
+        <strong>Total Spent:</strong>
+        <span className={styles.span}>${totals.all}</span>
+        <strong>Remaining Budget:</strong>
+        <span className={styles.span}>$</span>
       </div>
 
       <div className={styles.para}>
-        <h5 className={styles.subSumTitle}>Today:</h5>{" "}
+        <h5 className={styles.subSumTitle}>Today:</h5>
         <span className={styles.span}>${totals.today}</span>
-        <h5 className={styles.subSumTitle}>This Week:</h5>{" "}
+        <h5 className={styles.subSumTitle}>This Week:</h5>
         <span className={styles.span}>${totals.week}</span>
-        <h5 className={styles.subSumTitle}>This Month:</h5>{" "}
+        <h5 className={styles.subSumTitle}>This Month:</h5>
         <span className={styles.span}>${totals.month}</span>
-        <h5 className={styles.subSumTitle}>This Year:</h5>{" "}
+        <h5 className={styles.subSumTitle}>This Year:</h5>
         <span className={styles.span}>${totals.year}</span>
       </div>
 
       <div className={styles.link}>
-        <Link to="/expenses" className="button">
-          View All
-        </Link>
-        <Link to="/add" className="button">
-          + Add Expense
-        </Link>
-        <Link to="/stats" className="button">
-          See Stats
-        </Link>
+        <Button to="/expenses">View All</Button>
+        <Button to="/add">+ Add Expense</Button>
+        <Button to="/stats">See Stats</Button>
       </div>
     </section>
   );

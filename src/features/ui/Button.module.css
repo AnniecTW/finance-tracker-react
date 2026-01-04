@@ -1,0 +1,18 @@
+.button {
+  background-color: var(--clr-bg-element);
+  color: #343a40;
+  font-size: 1.4rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: var(--clr-btn);
+}

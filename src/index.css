@@ -2,7 +2,9 @@
   --clr-btn: #ffddae;
   --clr-btn-rgb: 255, 221, 174;
   --clr-hl: #d4f6ff;
-  --clr-bg-1: #fbfbfb;
+  --clr-bg-page: #f7f7f7;
+  --clr-bg-element: #fbfbfb;
+  --clr-bg-card: #ffffff;
   --clr-bg-2: #c6e7ff;
   --spinner-color: #333;
   --clr-err: #cc0000;
@@ -19,25 +21,8 @@ body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
   color: #495057;
-  font-size: 2rem;
+  font-size: 1.6rem;
   line-height: 1.6;
-}
-
-.layout {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 2rem;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 200px 0 40px 0;
-  background: #f7f7f7;
 }
 
 section {
@@ -46,23 +31,6 @@ section {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   min-width: 340px;
-}
-
-.button {
-  background-color: var(--clr-bg-1);
-  color: #343a40;
-  font-size: 1.5rem;
-  padding: 0.8rem 1.2rem;
-  border: none;
-  border-radius: 7px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
-}
-
-.button:hover {
-  background-color: var(--clr-btn);
 }
 
 .btn-group {
@@ -90,7 +58,7 @@ select {
   padding: 0.8rem 1.2rem;
   border: 1px solid var(--clr-hl);
   border-radius: 6px;
-  background-color: var(--clr-bg-1);
+  background-color: var(--clr-bg-element);
   transition: all 0.2s;
   width: 100%;
 }

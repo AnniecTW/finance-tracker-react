@@ -28,6 +28,7 @@ function Signup() {
             id="fullName"
             disabled={isLoading}
             {...register("fullName", { required: "This field is required" })}
+            className={styles.input}
           />
         </FormRow>
 
@@ -48,6 +49,7 @@ function Signup() {
                 message: "Please provide a valid email address",
               },
             })}
+            className={styles.input}
           />
         </FormRow>
 
@@ -67,6 +69,7 @@ function Signup() {
                 message: "Password needs a minimum of 8 characters",
               },
             })}
+            className={styles.input}
           />
         </FormRow>
 
@@ -84,12 +87,11 @@ function Signup() {
               validate: (value) =>
                 value === getValues().password || "Password needs to match",
             })}
+            className={styles.input}
           />
         </FormRow>
         <div className="btn-group">
-          <Link to="/" className="button">
-            Cancel
-          </Link>
+          <Button to="/">Cancel</Button>
           <Button type="submit" disable={isLoading}>
             Create new user
           </Button>
