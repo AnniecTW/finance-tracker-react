@@ -167,7 +167,7 @@ function ExpenseForm({
         </div>
       </FormRow>
       <div className={styles.formButtons}>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} variation="primary">
           {isSubmitting ? "Saving..." : submitLabel}
         </Button>
         {<Button onClick={handleCancel}>Cancel</Button>}

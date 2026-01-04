@@ -1,5 +1,7 @@
 :root {
   --clr-btn: #ffddae;
+  --clr-btn-hover: #ffcc80;
+  --clr-btn-sec-hover: #dbf5f0;
   --clr-btn-rgb: 255, 221, 174;
   --clr-hl: #d4f6ff;
   --clr-bg-page: #f7f7f7;
@@ -8,7 +10,8 @@
   --clr-bg-2: #c6e7ff;
   --spinner-color: #333;
   --clr-err: #cc0000;
-  --clr-text: #333;
+  --clr-body-text: #495057;
+  --clr-btn-text-hover: #333;
 }
 
 * {
@@ -20,7 +23,7 @@
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  color: #495057;
+  color: var(--clr-body-text);
   font-size: 1.6rem;
   line-height: 1.6;
 }

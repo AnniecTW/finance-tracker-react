@@ -4,14 +4,18 @@ import styles from "./Button.module.css";
 function Button({
   type = "button",
   to,
+  variation = "secondary",
   children,
   onClick,
   disabled = false,
   className = "",
 }) {
+  const variantClass = styles[variation] || styles.primary;
+  const fullClassName = `${styles.button} ${variantClass} ${className}`;
+
   if (to) {
     return (
-      <Link to={to} className={`${styles.button} ${className}`}>
+      <Link to={to} className={fullClassName}>
         {children}
       </Link>
     );
@@ -19,7 +23,7 @@ function Button({
   return (
     <button
       type={type}
-      className={`${styles.button} ${className}`}
+      className={fullClassName}
       onClick={onClick}
       disabled={disabled}
     >
