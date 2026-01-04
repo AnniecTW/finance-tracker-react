@@ -12,6 +12,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 90%;
+  margin: 30px 15px;
 }
 
 .loginContainer {
@@ -31,7 +32,7 @@
   background: linear-gradient(135deg, var(--clr-bg-2), var(--clr-hl));
 }
 
-.loginForm input {
+.input {
   padding: 0.8rem 1rem;
   border: 1.5px solid #ddd;
   border-radius: 0.8rem;
@@ -41,7 +42,7 @@
   width: 100%;
 }
 
-.loginForm input:focus {
+.input:focus {
   border-color: var(--clr-bg-2);
-  background-color: var(--clr-bg-1);
+  background-color: var(--clr-bg-element);
 }

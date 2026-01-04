@@ -1,0 +1,13 @@
+.expenseContainer {
+  text-align: center;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  justify-items: flex-start;
+  padding-left: 1rem;
+  margin-top: 40px;
+}

@@ -1,0 +1,32 @@
+.button {
+  font-size: 1.4rem;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+.primary {
+  background-color: var(--clr-btn);
+  color: var(--clr-body-text);
+}
+
+.primary:hover {
+  background-color: var(--clr-btn-hover);
+  color: var(--clr-btn-text-hover);
+}
+
+.secondary {
+  background-color: var(--clr-bg-element);
+  color: var(--clr-body-text);
+}
+
+.secondary:hover {
+  background-color: var(--clr-btn-sec-hover);
+  color: var(--clr-btn-text-hover);
+}

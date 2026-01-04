@@ -1,0 +1,16 @@
+.layout {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 200px 0 40px 0;
+  background: var(--clr-bg-page);
+}

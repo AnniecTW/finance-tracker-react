@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLogin } from "../useLogin";
-import { Link } from "react-router-dom";
 import Button from "../../ui/Button";
 import styles from "./Login.module.css";
 
@@ -32,6 +31,7 @@ function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
+              className={styles.input}
             ></input>
           </div>
           <div className={styles.loginRow}>
@@ -43,12 +43,11 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
+              className={styles.input}
             ></input>
           </div>
           <div className="btn-group">
-            <Link to="/" className="button">
-              Cancel
-            </Link>
+            <Button to="/">Cancel</Button>
             <Button type="submit" disabled={isLoading}>
               Login
             </Button>

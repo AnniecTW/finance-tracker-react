@@ -1,31 +1,32 @@
 import { NavLink } from "react-router-dom";
 import User from "../user/components/User";
+import styles from "./PageNav.module.css";
 
 function PageNav() {
   return (
-    <nav className="nav">
-      <ul>
-        <li>
-          <NavLink to="/dashboard" className="navLink">
+    <nav className={styles.navContainer}>
+      <ul className={styles.navList}>
+        <li className={styles.navItem}>
+          <NavLink to="/dashboard" className={styles.navLink}>
             Dashboard
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/expenses" className="navLink">
+        <li className={styles.navItem}>
+          <NavLink to="/expenses" className={styles.navLink}>
             My Expenses
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/add" className="navLink">
+        <li className={styles.navItem}>
+          <NavLink to="/add" className={styles.navLink}>
             Add Expenses
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/stats" className="navLink">
+        <li className={styles.navItem}>
+          <NavLink to="/stats" className={styles.navLink}>
             Statistics
           </NavLink>
         </li>
-        <li>
+        <li className={styles.navItem}>
           <User />
         </li>
       </ul>

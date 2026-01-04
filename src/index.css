@@ -1,11 +1,17 @@
 :root {
   --clr-btn: #ffddae;
+  --clr-btn-hover: #ffcc80;
+  --clr-btn-sec-hover: #dbf5f0;
+  --clr-btn-rgb: 255, 221, 174;
   --clr-hl: #d4f6ff;
-  --clr-bg-1: #fbfbfb;
+  --clr-bg-page: #f7f7f7;
+  --clr-bg-element: #fbfbfb;
+  --clr-bg-card: #ffffff;
   --clr-bg-2: #c6e7ff;
   --spinner-color: #333;
   --clr-err: #cc0000;
-  --clr-text: #333;
+  --clr-body-text: #495057;
+  --clr-btn-text-hover: #333;
 }
 
 * {
@@ -17,26 +23,9 @@
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  color: #495057;
-  font-size: 2rem;
+  color: var(--clr-body-text);
+  font-size: 1.6rem;
   line-height: 1.6;
-}
-
-.layout {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 2rem;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  padding: 200px 0 40px 0;
-  background: #f7f7f7;
 }
 
 section {
@@ -47,114 +36,11 @@ section {
   min-width: 340px;
 }
 
-.button {
-  background-color: var(--clr-bg-1);
-  color: #343a40;
-  font-size: 1.5rem;
-  padding: 0.8rem 1.2rem;
-  border: none;
-  border-radius: 7px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
-}
-
-.button:hover {
-  background-color: var(--clr-btn);
-}
-
 .btn-group {
   grid-column: 1 / span 2;
   display: flex;
   gap: 2rem;
   margin: 2rem;
-}
-
-.expensesContainer {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem;
-  justify-content: center;
-}
-
-.list {
-  list-style: none;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 2rem;
-  border-right: 1px solid #ccc;
-  padding-right: 1rem;
-}
-
-.expenseItem {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 1.2rem;
-  border-radius: 7px;
-  transition: 0.5s;
-  text-decoration: none;
-  color: inherit;
-}
-
-.expenseItem:hover {
-  background-color: #f0f0f0;
-}
-
-.total-amount {
-  margin: 6rem 0;
-  font-size: 2.2rem;
-}
-
-/* PageNav */
-nav ul {
-  max-width: 1500px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav li {
-  list-style-type: none;
-}
-
-.navLink {
-  text-decoration: none;
-}
-
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-}
-
-/* Nav: User */
-.user {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 15px 0;
-  justify-content: flex-end;
-}
-
-.avatar {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-/* expense detail */
-.detail {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  align-items: center;
-  padding-left: 1rem;
 }
 
 /* disable */
@@ -166,11 +52,6 @@ input:disabled {
   opacity: 0.6;
 }
 
-/* add expense */
-.expenseContainer {
-  text-align: center;
-}
-
 /* Input & Select */
 input,
 select {
@@ -180,7 +61,7 @@ select {
   padding: 0.8rem 1.2rem;
   border: 1px solid var(--clr-hl);
   border-radius: 6px;
-  background-color: var(--clr-bg-1);
+  background-color: var(--clr-bg-element);
   transition: all 0.2s;
   width: 100%;
 }

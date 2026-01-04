@@ -1,10 +1,11 @@
 import ExpenseForm from "../components/ExpenseForm";
 import { useAddExpense } from "../useAddExpense";
+import styles from "./AddExpense.module.css";
 
 function AddExpense() {
   const { mutateAsync: addExpense, isAdding } = useAddExpense();
   return (
-    <div className="expenseContainer">
+    <div className={styles.AddExpenseContainer}>
       <h2>Add New Expense 💲</h2>
       <ExpenseForm
         onSubmit={(data) =>
