@@ -48,7 +48,7 @@ function Login() {
           </div>
           <div className="btn-group">
             <Button to="/">Cancel</Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button variation="primary" type="submit" disabled={isLoading}>
               Login
             </Button>
           </div>
