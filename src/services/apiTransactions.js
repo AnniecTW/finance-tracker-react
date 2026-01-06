@@ -102,11 +102,12 @@ export async function addEditExpense({ id, ...newExpense }) {
     imageUrl = null;
   }
 
-  const { item, amount, category, userID } = newExpense;
+  const { item, amount, category, notes, userID } = newExpense;
   const payload = {
     item,
     amount,
     category,
+    notes,
     userID,
     image: imageUrl,
   };

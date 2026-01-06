@@ -4,10 +4,16 @@
 
 .detail {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(100px, 1fr) minmax(200px, 2.5fr);
   gap: 1.5rem;
   align-items: center;
   justify-items: flex-start;
   padding-left: 1rem;
   margin-top: 40px;
+}
+
+.notesContent {
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
 }

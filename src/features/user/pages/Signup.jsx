@@ -92,7 +92,7 @@ function Signup() {
         </FormRow>
         <div className="btn-group">
           <Button to="/">Cancel</Button>
-          <Button type="submit" disable={isLoading}>
+          <Button type="submit" variation="primary" disable={isLoading}>
             Create new user
           </Button>
         </div>
