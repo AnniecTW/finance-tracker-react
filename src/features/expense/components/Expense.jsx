@@ -51,6 +51,8 @@ function Expense() {
           <strong>Item:</strong> <span>{expense.item}</span>
           <strong>Amount:</strong> <span>${expense.amount}</span>
           <strong>Category:</strong> <span>{expense.category}</span>
+          <strong>Notes:</strong>
+          <p className={styles.notesContent}>{expense.notes || "---"}</p>
           <strong>Photo</strong>
           <img
             src={

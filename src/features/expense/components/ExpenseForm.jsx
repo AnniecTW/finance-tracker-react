@@ -142,6 +142,21 @@ function ExpenseForm({
           ))}
         </select>
       </FormRow>
+      <FormRow label="Notes" error={errors?.notes?.message}>
+        <textarea
+          id="notes"
+          className={styles.textarea}
+          disabled={isSubmitting}
+          placeholder="Add any additional details..."
+          {...register("notes", {
+            maxLength: {
+              value: 500,
+              message: "Notes should be under 500 characters",
+            },
+          })}
+          onWheel={(e) => e.target.blur()}
+        />
+      </FormRow>
       <FormRow label="Photo" error={errors?.image?.message} id="image">
         <div className={styles.fileInputContainer}>
           <input
