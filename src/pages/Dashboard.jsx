@@ -5,6 +5,10 @@ import Button from "../features/ui/Button";
 import Spinner from "../features/ui/Spinner";
 import styles from "./Dashboard.module.css";
 
+import { TbViewportTall } from "react-icons/tb";
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { HiOutlineChartBar } from "react-icons/hi2";
+
 import {
   isSameDay,
   isSameWeek,
@@ -73,9 +77,18 @@ function Dashboard() {
       </div>
 
       <div className={styles.link}>
-        <Button to="/expenses">View All</Button>
-        <Button to="/add">+ Add Expense</Button>
-        <Button to="/stats">See Stats</Button>
+        <Button to="/expenses" aria-label="View all expenses">
+          <TbViewportTall />
+          <span className={styles.btnText}>View All</span>
+        </Button>
+        <Button to="/add" aria-label="Add a new expense">
+          <IoMdAddCircleOutline />
+          <span className={styles.btnText}>Add Expense</span>
+        </Button>
+        <Button to="/stats" aria-label="See Statistics">
+          <HiOutlineChartBar />
+          <span className={styles.btnText}>See Stats</span>
+        </Button>
       </div>
     </section>
   );
