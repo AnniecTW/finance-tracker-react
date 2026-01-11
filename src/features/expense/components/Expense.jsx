@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useExpensesById } from "../useExpenses";
 import { useDeleteExpense } from "../useDeleteExpense";
@@ -9,9 +9,13 @@ import styles from "./Expense.module.css";
 
 import Button from "../../ui/Button";
 import ExpenseForm from "./ExpenseForm";
+import Spinner from "../../ui/Spinner";
+
+import { HiArrowLeft } from "react-icons/hi2";
 
 function Expense() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // Fetch expense by id
   const { data: expense, isLoading, error } = useExpensesById(id);
@@ -31,12 +35,20 @@ function Expense() {
     });
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (error) return <div>Error loading expense. Error: {error.message}</div>;
   if (!expense) return <div>No expense found.</div>;
 
   return (
     <div className={styles.expenseContainer}>
+      <Button
+        onClick={() => {
+          navigate("/expenses");
+        }}
+        className={styles.backButton}
+      >
+        <HiArrowLeft />
+      </Button>
       <h3>Expense Detail</h3>
       {isEditing ? (
         <ExpenseForm
@@ -66,14 +78,11 @@ function Expense() {
               e.target.src = "/no-photo.jpg";
             }}
           />
-          <div className="btn-group">
+          <div className={styles.btnGroup}>
             <Button onClick={handleDuplicate} disabled={isAdding}>
               <HiSquare2Stack />
             </Button>
-            <Button
-              onClick={() => setIsEditing(true)}
-              style={{ marginRight: "1rem" }}
-            >
+            <Button onClick={() => setIsEditing(true)}>
               <HiPencil />
             </Button>
             <Button onClick={() => deleteExpense(id)} disabled={isDeleting}>

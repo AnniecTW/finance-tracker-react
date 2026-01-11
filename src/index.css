@@ -36,13 +36,6 @@ section {
   min-width: 340px;
 }
 
-.btn-group {
-  grid-column: 1 / span 2;
-  display: flex;
-  gap: 2rem;
-  margin: 2rem;
-}
-
 /* disable */
 button:disabled,
 input:disabled {
@@ -83,4 +76,11 @@ select {
   select {
     font-size: 1.4rem;
   }
+}
+
+.btn-group {
+  justify-self: center;
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
 }

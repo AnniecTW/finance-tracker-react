@@ -1,10 +1,12 @@
 .expenseContainer {
   text-align: center;
+  position: relative;
+  padding-top: 3rem;
 }
 
 .detail {
   display: grid;
-  grid-template-columns: minmax(100px, 1fr) minmax(200px, 2.5fr);
+  grid-template-columns: minmax(100px, 1.5fr) minmax(200px, 2.5fr);
   gap: 1.5rem;
   align-items: center;
   justify-items: flex-start;
@@ -16,4 +18,37 @@
   text-align: left;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.btnGroup {
+  grid-column: span 2;
+  justify-self: center;
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
+}
+
+.backButton {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .btnGroup > * {
+    font-size: 1.8rem;
+  }
+
+  .backButton {
+    position: absolute;
+    top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .backButton:hover {
+    background: none;
+  }
 }
