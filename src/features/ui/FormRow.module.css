@@ -2,7 +2,7 @@
   display: grid;
   align-items: flex-start;
   text-align: left;
-  grid-template-columns: 120px 1.5fr 1fr;
+  grid-template-columns: 180px 1.5fr 1fr;
   margin: 20px 0 0 40px;
 }
 
@@ -27,6 +27,7 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    margin: 0;
   }
 
   /* file input */

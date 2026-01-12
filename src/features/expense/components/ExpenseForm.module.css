@@ -47,6 +47,7 @@
   .formContainer {
     padding: 1.5rem;
     align-items: center;
+    max-width: 300px;
   }
 }
 
