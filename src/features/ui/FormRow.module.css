@@ -1,9 +1,11 @@
 .formRow {
   display: grid;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
   grid-template-columns: 180px 1.5fr 1fr;
   margin: 20px 0 0 40px;
+  padding-right: 10px;
+  width: 100%;
 }
 
 .error {
@@ -35,5 +37,9 @@ input::-webkit-inner-spin-button {
     width: auto;
     max-width: 100%;
     text-align: center;
+  }
+
+  .error {
+    margin-left: 0;
   }
 }

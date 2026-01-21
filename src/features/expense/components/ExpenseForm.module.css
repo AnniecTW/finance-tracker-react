@@ -11,6 +11,20 @@
   align-items: flex-start;
 }
 
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 1.5rem;
+    align-items: center;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .formContainer {
+    max-width: 300px;
+  }
+}
+
 .fileInput {
   font-size: 1.4rem;
   cursor: pointer;
@@ -41,14 +55,6 @@
   gap: 1.2rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .formContainer {
-    padding: 1.5rem;
-    align-items: center;
-    max-width: 300px;
-  }
 }
 
 .fileInputContainer {

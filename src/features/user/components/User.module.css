@@ -1,13 +1,118 @@
-.userContainer {
+.userSection {
+  position: absolute;
+  right: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.3rem;
+  gap: 10px;
+}
+
+.userSummary {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin: 15px 0;
-  justify-content: flex-end;
+  gap: 8px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 12px;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .avatar {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 10px;
+}
+
+.avatarImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chevron {
+  transition: transform 0.3s ease;
+  color: #666;
+}
+
+.open {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  background: white;
+  min-width: 200px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #eee;
+}
+
+.active {
+  display: flex;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: none;
+}
+
+.menuText {
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
+
+@media (max-width: 1440px) {
+  .fullName {
+    display: none;
+  }
+
+  .userSummary {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .greeting {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .chevron {
+    display: none;
+  }
+
+  .dropdownMenu {
+    display: flex;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    min-width: auto;
+  }
+
+  .menuText {
+    display: none;
+  }
+
+  .userSummary {
+    cursor: default;
+  }
 }

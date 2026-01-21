@@ -36,7 +36,7 @@ function ExpenseList() {
   return (
     <section className={styles.expensesContainer}>
       <ul className={styles.list}>
-        <h2>Expense List 📝</h2>
+        <h2>Expense List</h2>
         {allExpenses.map((expense) => (
           <ExpenseItem key={expense.id} expense={expense} />
         ))}

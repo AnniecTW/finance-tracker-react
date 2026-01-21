@@ -6,8 +6,12 @@ function UserAvatar() {
   const { fullName, avatar } = user?.user_metadata ?? {};
   return (
     <div className={styles.avatar}>
-      <img src={avatar || "default-user.jpg"} alt={`Avatar of ${fullName}`} />
-      <span>{fullName}</span>
+      <img
+        src={avatar || "default-user.jpg"}
+        alt={`Avatar of ${fullName}`}
+        className={styles.avatarImg}
+      />
+      <span className={styles.fullName}>{fullName}</span>
     </div>
   );
 }
