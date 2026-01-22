@@ -18,6 +18,7 @@
 
 .navItem {
   list-style-type: none;
+  width: 20%;
 }
 
 .navLink {
@@ -81,10 +82,6 @@
 @media (max-width: 425px) {
   .navLink {
     font-size: 0.85rem;
-  }
-
-  .navItem {
-    width: 25%;
   }
 }
 

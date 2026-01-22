@@ -43,3 +43,9 @@ input::-webkit-inner-spin-button {
     margin-left: 0;
   }
 }
+
+@media (max-width: 425px) {
+  .formRow {
+    width: 100%;
+  }
+}

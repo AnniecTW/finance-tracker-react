@@ -1,3 +1,13 @@
-.AddExpenseContainer {
+.addExpenseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 10px;
   text-align: center;
+}
+
+@media (max-width: 320px) {
+  .addExpenseContainer {
+    padding: 20px;
+  }
 }

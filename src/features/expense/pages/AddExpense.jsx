@@ -5,7 +5,7 @@ import styles from "./AddExpense.module.css";
 function AddExpense() {
   const { mutateAsync: addExpense, isAdding } = useAddExpense();
   return (
-    <section className={styles.AddExpenseContainer}>
+    <section className={styles.addExpenseContainer}>
       <h2>Add New Expense 💲</h2>
       <ExpenseForm
         onSubmit={(data) =>
