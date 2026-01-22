@@ -5,6 +5,7 @@
   align-items: center;
   height: 100vh;
   gap: 4rem;
+  text-align: center;
 }
 
 .loginRow {

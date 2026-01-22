@@ -95,7 +95,7 @@ function Signup() {
           <div className="btn-group">
             <Button to="/">Cancel</Button>
             <Button type="submit" variation="primary" disable={isLoading}>
-              Create new user
+              Create
             </Button>
           </div>
         </form>
