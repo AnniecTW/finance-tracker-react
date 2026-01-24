@@ -33,14 +33,9 @@ section {
   padding: 32px 40px;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  width: 80%;
   min-width: 340px;
-}
-
-.btn-group {
-  grid-column: 1 / span 2;
-  display: flex;
-  gap: 2rem;
-  margin: 2rem;
+  max-width: 800px;
 }
 
 /* disable */
@@ -83,4 +78,11 @@ select {
   select {
     font-size: 1.4rem;
   }
+}
+
+.btn-group {
+  justify-self: center;
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
 }

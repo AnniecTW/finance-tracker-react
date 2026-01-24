@@ -1,9 +1,11 @@
 .formRow {
   display: grid;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
-  grid-template-columns: 120px 1.5fr 1fr;
+  grid-template-columns: 180px 1.5fr 1fr;
   margin: 20px 0 0 40px;
+  padding-right: 10px;
+  width: 100%;
 }
 
 .error {
@@ -27,6 +29,7 @@ input::-webkit-inner-spin-button {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    margin: 0;
   }
 
   /* file input */
@@ -34,5 +37,15 @@ input::-webkit-inner-spin-button {
     width: auto;
     max-width: 100%;
     text-align: center;
+  }
+
+  .error {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .formRow {
+    width: 100%;
   }
 }

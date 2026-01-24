@@ -44,6 +44,8 @@ function ExpenseForm({
 
   const watchedItem = watch("item");
   const currentImage = watch("image");
+  const hasImage =
+    currentImage instanceof FileList ? currentImage.length > 0 : !!currentImage;
 
   const handleRemoveImage = () => {
     setValue("image", null);
@@ -167,7 +169,7 @@ function ExpenseForm({
             disabled={isSubmitting}
             {...register("image")}
           />
-          {currentImage && (
+          {hasImage && (
             <div className={styles.imageStatus}>
               <span className={styles.statusText}>
                 {typeof currentImage === "string"

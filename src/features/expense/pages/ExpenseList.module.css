@@ -2,18 +2,51 @@
   display: flex;
   gap: 2rem;
   padding: 2rem;
-  justify-content: center;
 }
 
 .list {
   list-style: none;
   min-width: 300px;
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   border-right: 1px solid #ccc;
   padding-right: 1rem;
+}
+
+.list > h2 {
+  text-align: center;
+}
+
+.detailContainer > div {
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+@media (max-width: 1200px) {
+  .expensesContainer {
+    display: block;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .detailContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .list {
+    border: none;
+  }
 }
 
 .expenseItem {

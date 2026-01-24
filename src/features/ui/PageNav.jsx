@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
-import User from "../user/components/User";
 import styles from "./PageNav.module.css";
+import {
+  HiOutlineHome,
+  HiOutlineTable,
+  HiOutlinePlusCircle,
+  HiOutlineChartPie,
+} from "react-icons/hi";
 
 function PageNav() {
   return (
@@ -8,26 +13,27 @@ function PageNav() {
       <ul className={styles.navList}>
         <li className={styles.navItem}>
           <NavLink to="/dashboard" className={styles.navLink}>
-            Dashboard
+            <HiOutlineHome className={styles.icon} />
+            <span className={styles.navLabel}>Dashboard</span>
           </NavLink>
         </li>
         <li className={styles.navItem}>
           <NavLink to="/expenses" className={styles.navLink}>
-            My Expenses
+            <HiOutlineTable className={styles.icon} />
+            <span className={styles.navLabel}>Expenses</span>
           </NavLink>
         </li>
         <li className={styles.navItem}>
           <NavLink to="/add" className={styles.navLink}>
-            Add Expenses
+            <HiOutlinePlusCircle className={styles.icon} />
+            <span className={styles.navLabel}>Add</span>
           </NavLink>
         </li>
         <li className={styles.navItem}>
           <NavLink to="/stats" className={styles.navLink}>
-            Statistics
+            <HiOutlineChartPie className={styles.icon} />
+            <span className={styles.navLabel}>Statistics</span>
           </NavLink>
-        </li>
-        <li className={styles.navItem}>
-          <User />
         </li>
       </ul>
     </nav>

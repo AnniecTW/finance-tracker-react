@@ -6,7 +6,7 @@
 .para {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 18px 0 24px 0;
+  margin: 24px 0;
 }
 
 .span {
@@ -24,5 +24,53 @@
 .link {
   display: flex;
   justify-content: space-between;
-  margin: 18px 0 24px 0;
+  gap: 12px;
+  margin: 30px 0 24px 0;
+}
+
+.btnText {
+  display: inline;
+  margin-left: 8px;
+}
+
+.link a,
+.link button {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link svg {
+  width: 25px;
+  height: 25px;
+  transition: all 0.2s;
+}
+
+@media (max-width: 850px) {
+  .btnText {
+    display: none;
+  }
+
+  .link {
+    justify-content: space-around;
+  }
+
+  .link svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .link a,
+  .link button {
+    padding: 15px;
+    border-radius: 50%;
+  }
+
+  .para {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 18px 0 24px 0;
+  }
 }

@@ -5,6 +5,7 @@
   align-items: center;
   height: 100vh;
   gap: 4rem;
+  text-align: center;
 }
 
 .loginRow {
@@ -18,7 +19,6 @@
 .loginContainer {
   display: flex;
   flex-direction: column;
-  border-radius: 1.5rem;
   max-width: 600px;
   width: 90%;
   text-align: center;
@@ -30,6 +30,7 @@
   align-items: center;
   gap: 0.6rem;
   background: linear-gradient(135deg, var(--clr-bg-2), var(--clr-hl));
+  border-radius: 1.5rem;
 }
 
 .input {
