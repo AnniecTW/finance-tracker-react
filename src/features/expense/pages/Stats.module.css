@@ -1,0 +1,14 @@
+.chartContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pieContainer {
+  flex: 1 1 300px;
+  height: 300px;
+}
+
+.barContainer {
+  flex: 2 1 500px;
+}

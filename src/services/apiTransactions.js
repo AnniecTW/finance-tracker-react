@@ -73,7 +73,7 @@ export async function addEditExpense({ id, ...newExpense }) {
   const hasImagePath =
     typeof imageField === "string" &&
     imageField.startsWith(
-      `${supabaseUrl}/storage/v1/object/public/transaction-images`
+      `${supabaseUrl}/storage/v1/object/public/transaction-images`,
     );
 
   let imageUrl = null;
@@ -102,19 +102,20 @@ export async function addEditExpense({ id, ...newExpense }) {
     imageUrl = null;
   }
 
-  const { item, amount, category, notes, userID } = newExpense;
+  const { item, amount, category, notes, user_id } = newExpense;
   const payload = {
     item,
     amount,
     category,
     notes,
-    userID,
+    user_id,
     image: imageUrl,
   };
 
   let query = supabase.from("transactions");
 
-  if (!id) query = query.insert([payload]); // CREATE
+  if (!id)
+    query = query.insert([payload]); // CREATE
   else query = query.update(payload).eq("id", id); // EDIT
 
   const { data, error } = await query.select();
