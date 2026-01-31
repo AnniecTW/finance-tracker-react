@@ -8,10 +8,13 @@
   --clr-bg-element: #fbfbfb;
   --clr-bg-card: #ffffff;
   --clr-bg-2: #c6e7ff;
-  --spinner-color: #333;
+  --clr-bg-subtle: #f8fafc;
   --clr-err: #cc0000;
   --clr-body-text: #495057;
   --clr-btn-text-hover: #333;
+  --clr-border-dashed: #e2e8f0;
+  --clr-text-muted: #64748b;
+  --spinner-color: #333;
 }
 
 * {

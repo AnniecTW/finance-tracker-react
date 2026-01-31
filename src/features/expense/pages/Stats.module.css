@@ -1,3 +1,57 @@
+.statsControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
+.statsControls button {
+  font-size: inherit;
+  padding: 4px 12px;
+}
+
+.viewToggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.viewToggle button.active {
+  background-color: var(--clr-btn) !important;
+  font-weight: 600;
+}
+
+.dateNav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dateDisplay {
+  font-weight: 600;
+  min-width: 150px;
+  text-align: center;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border: 2px dashed var(--clr-border-dashed);
+  border-radius: 12px;
+  color: var(----clr-text-muted);
+  margin: 20px 0;
+  background-color: var(--clr-bg-subtle);
+}
+
+.emptyState p {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
 .chartContainer {
   display: flex;
   gap: 20px;
