@@ -1,19 +1,24 @@
 :root {
+  /* Button Colors */
   --clr-btn: #ffddae;
   --clr-btn-hover: #ffcc80;
   --clr-btn-sec-hover: #dbf5f0;
   --clr-btn-rgb: 255, 221, 174;
-  --clr-hl: #d4f6ff;
-  --clr-bg-page: #f7f7f7;
-  --clr-bg-element: #fbfbfb;
+
+  /* Surfaces */
+  --clr-bg-main: #f7f7f7;
   --clr-bg-card: #ffffff;
-  --clr-bg-2: #c6e7ff;
-  --clr-bg-subtle: #f8fafc;
+  --clr-bg-hl: #c6e7ff;
+
+  /* Status & Text */
+  --clr-hl: #d4f6ff;
   --clr-err: #cc0000;
-  --clr-body-text: #495057;
-  --clr-btn-text-hover: #333;
   --clr-border-dashed: #e2e8f0;
+  --clr-text-main: #495057;
   --clr-text-muted: #64748b;
+  --clr-btn-text-hover: #333;
+
+  /* Others */
   --spinner-color: #333;
 }
 
@@ -26,7 +31,7 @@
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
-  color: var(--clr-body-text);
+  color: var(--clr-text-main);
   font-size: 1.6rem;
   line-height: 1.6;
 }
@@ -59,7 +64,7 @@ select {
   padding: 0.8rem 1.2rem;
   border: 1px solid var(--clr-hl);
   border-radius: 6px;
-  background-color: var(--clr-bg-element);
+  background-color: var(--clr-bg-main);
   transition: all 0.2s;
   width: 100%;
 }

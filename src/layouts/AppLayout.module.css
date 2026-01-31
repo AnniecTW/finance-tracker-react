@@ -36,7 +36,7 @@
   display: flex;
   justify-content: center;
   padding: 120px 0 20px 0;
-  background: var(--clr-bg-page);
+  background: var(--clr-bg-main);
 }
 
 @media (max-width: 768px) {
