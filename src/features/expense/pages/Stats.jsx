@@ -1,4 +1,3 @@
-import { useState, useMemo } from "react";
 import {
   PieChart,
   Pie,
@@ -11,101 +10,36 @@ import {
   YAxis,
 } from "recharts";
 import { useAllExpenses } from "../useExpenses";
+import { useStatsData } from "../useStatsData";
 import styles from "./Stats.module.css";
-import dayjs from "dayjs";
 import Button from "../../ui/Button";
 import Spinner from "../../ui/Spinner";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
+const COLORS = ["#0077b6", "#0096c7", "#00b4d8", "#48cae4", "#90e0ef"];
 
 function Stats() {
   const { data: allExpenses = [], isLoading, error } = useAllExpenses();
 
-  const [currentDate, setCurrentDate] = useState(dayjs());
-  const [viewType, setViewType] = useState("monthly");
-
-  const unit = viewType === "monthly" ? "month" : "year";
-  const dateFormat = viewType === "monthly" ? "MM-DD" : "YYYY-MM";
-
-  const handlePrev = () => {
-    setCurrentDate(currentDate.subtract(1, unit));
-  };
-
-  const handleNext = () => {
-    setCurrentDate(currentDate.add(1, unit));
-  };
-
-  const filteredExpenses = useMemo(() => {
-    return allExpenses.filter((item) => {
-      const itemDate = dayjs(item.created_at);
-      return itemDate.isSame(currentDate, unit);
-    });
-  }, [allExpenses, currentDate, unit]);
-
-  const { pieData, barData, categories, totalAmount } = useMemo(() => {
-    if (!filteredExpenses.length)
-      return { pieData: [], barData: [], categories: [], totalAmount: 0 };
-
-    const uniqueCategories = [
-      ...new Set(filteredExpenses.map((t) => t.category)),
-    ];
-
-    const pieMap = {};
-    uniqueCategories.forEach((cat) => (pieMap[cat] = 0));
-    let currentTotal = 0;
-
-    const grouped = filteredExpenses.reduce((acc, curr) => {
-      pieMap[curr.category] += curr.amount;
-      currentTotal += curr.amount;
-
-      const dateKey = dayjs(curr.created_at).format(dateFormat);
-
-      if (!acc[dateKey]) {
-        acc[dateKey] = { date: dateKey };
-        uniqueCategories.forEach((cat) => (acc[dateKey][cat] = 0));
-      }
-
-      acc[dateKey][curr.category] += curr.amount;
-      return acc;
-    }, {});
-
-    const sortedBarData = Object.values(grouped).sort((a, b) =>
-      a.date > b.date ? 1 : -1,
-    );
-
-    const formattedPieData = Object.entries(pieMap).map(
-      ([name, value], index) => ({
-        name,
-        value,
-        fill: COLORS[index % COLORS.length],
-      }),
-    );
-
-    return {
-      pieData: formattedPieData,
-      barData: sortedBarData,
-      categories: uniqueCategories,
-      totalAmount: currentTotal,
-    };
-  }, [filteredExpenses, dateFormat]);
-
-  const now = dayjs();
-  const isFuture =
-    currentDate.isSame(now, unit) || currentDate.isAfter(now, unit);
-
-  const firstExpenseDate =
-    allExpenses.length > 0 ? dayjs(allExpenses.at(-1).created_at) : null;
-  const isPast =
-    firstExpenseDate &&
-    (currentDate.isSame(firstExpenseDate, unit) ||
-      currentDate.isBefore(firstExpenseDate, unit));
+  const {
+    currentDate,
+    viewType,
+    setViewType,
+    handlePrev,
+    handleNext,
+    filteredExpenses,
+    isFuture,
+    isPast,
+    pieData,
+    barData,
+    categories,
+    totalAmount,
+  } = useStatsData(allExpenses, COLORS);
 
   if (isLoading) return <Spinner />;
   if (error) return <div>Error loading expense. Error: {error.message}</div>;
 
   return (
     <section>
-      <h3>Stats 📊 </h3>
       <div className={styles.statsControls}>
         <div className={styles.viewToggle}>
           <Button
@@ -167,16 +101,14 @@ function Stats() {
                   y="50%"
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  dy={-15}
                   style={{ fontSize: "1.6rem", fontWeight: "bold" }}
                 >{`$${totalAmount.toLocaleString()}`}</text>
-                <Legend />
               </PieChart>
             </ResponsiveContainer>
           </div>
           <div className={styles.barContainer}>
             <h5>Spending Trend</h5>
-            <ResponsiveContainer width="100%" aspect={1.5}>
+            <ResponsiveContainer width="100%" aspect={0.9}>
               <BarChart
                 data={barData}
                 margin={{
@@ -206,7 +138,12 @@ function Stats() {
                     boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
                   }}
                 />
-                <Legend />
+                <Legend
+                  wrapperStyle={{
+                    position: "relative",
+                    top: "5px",
+                  }}
+                />
                 {categories.map((category, index) => (
                   <Bar
                     key={category}

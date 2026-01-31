@@ -7,6 +7,12 @@
   font-size: 1.2rem;
 }
 
+@media (max-width: 768px) {
+  .statsControls {
+    flex-direction: column;
+  }
+}
+
 .statsControls button {
   font-size: inherit;
   padding: 4px 12px;
@@ -65,4 +71,25 @@
 
 .barContainer {
   flex: 2 1 500px;
+}
+
+:global(.recharts-default-legend) {
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  :global(.recharts-default-legend) {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  :global(.recharts-default-legend) {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  :global(.recharts-legend-item) {
+    margin-right: 5px !important;
+  }
 }
