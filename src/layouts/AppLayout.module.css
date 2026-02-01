@@ -41,6 +41,7 @@
 
 @media (max-width: 768px) {
   .main {
+    padding-top: 0;
     padding-bottom: 85px;
   }
 }

@@ -77,9 +77,39 @@
   font-weight: 500;
 }
 
+:global(.recharts-cartesian-axis-tick-value) {
+  fill: var(--clr-text-muted);
+}
+
+:global(.recharts-default-tooltip) {
+  padding: 8px 12px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 768px) {
   :global(.recharts-default-legend) {
     font-size: 16px;
+  }
+  :global(.recharts-cartesian-axis-tick-value) {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  :global(.recharts-default-tooltip) {
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+  }
+
+  :global(.recharts-tooltip-item) {
+    padding: 1px 0 !important;
+    font-size: 11px !important;
+  }
+
+  :global(.recharts-tooltip-label) {
+    margin-bottom: 2px !important;
+    font-weight: bold;
   }
 }
 
@@ -91,5 +121,9 @@
 
   :global(.recharts-legend-item) {
     margin-right: 5px !important;
+  }
+
+  :global(.recharts-cartesian-axis-tick-value) {
+    font-size: 12px;
   }
 }

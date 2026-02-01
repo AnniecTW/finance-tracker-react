@@ -33,7 +33,49 @@ function Stats() {
     barData,
     categories,
     totalAmount,
+    chartAspect,
+    windowWidth,
+    formatXAxis,
   } = useStatsData(allExpenses, COLORS);
+
+  const pieCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    name,
+    value,
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 2;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    const textAnchor = x > cx ? "start" : "end";
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="var(--clr-body-text)"
+        textAnchor={textAnchor}
+        dominantBaseline="central"
+      >
+        <tspan x={x} dy="-0.6em" fontweight="600" fontSize="16px">
+          {name}
+        </tspan>
+        <tspan x={x} dy="1.4em" fontSize="14px">
+          ${value}
+        </tspan>
+      </text>
+    );
+  };
+
+  // handling pie size
+  const isMobile = windowWidth < 600;
+  const outerRadius = isMobile ? 70 : 90;
+  const innerRadius = isMobile ? 50 : 60;
 
   if (isLoading) return <Spinner />;
   if (error) return <div>Error loading expense. Error: {error.message}</div>;
@@ -87,9 +129,10 @@ function Stats() {
                   nameKey="name"
                   cx="50%"
                   cy="50%"
-                  innerRadius={50}
-                  outerRadius={80}
+                  innerRadius={innerRadius}
+                  outerRadius={outerRadius}
                   paddingAngle={5}
+                  label={pieCustomizedLabel}
                 />
                 <Tooltip
                   formatter={(value, name) => {
@@ -98,28 +141,43 @@ function Stats() {
                 />
                 <text
                   x="50%"
-                  y="50%"
+                  y="47%"
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  style={{ fontSize: "1.6rem", fontWeight: "bold" }}
+                  style={{ fontSize: isMobile ? "0.9rem" : "1rem" }}
+                >
+                  Total Expense
+                </text>
+                <text
+                  x="50%"
+                  y="55%"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  style={{ fontSize: "1.2rem", fontWeight: "bold" }}
                 >{`$${totalAmount.toLocaleString()}`}</text>
               </PieChart>
             </ResponsiveContainer>
           </div>
           <div className={styles.barContainer}>
             <h5>Spending Trend</h5>
-            <ResponsiveContainer width="100%" aspect={0.9}>
+            <ResponsiveContainer width="100%" aspect={chartAspect}>
               <BarChart
                 data={barData}
                 margin={{
                   top: 20,
                   right: 0,
                   left: 0,
-                  bottom: 15,
+                  bottom: 50,
                 }}
               >
-                <XAxis dataKey="date" />
-                <YAxis width="auto" />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  tickFormatter={formatXAxis}
+                  tick={{ fontSize: "inherit" }}
+                  interval={0}
+                />
+                <YAxis width="auto" tickLine={false} />
                 <Tooltip
                   cursor={false}
                   formatter={(value, name) => {
@@ -131,11 +189,6 @@ function Stats() {
                       0,
                     );
                     return `${label} (Total: $${total.toLocaleString()})`;
-                  }}
-                  contentStyle={{
-                    borderRadius: "8px",
-                    border: "none",
-                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
                   }}
                 />
                 <Legend

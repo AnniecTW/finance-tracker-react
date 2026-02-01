@@ -1,9 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import dayjs from "dayjs";
 
 export function useStatsData(allExpenses, colors) {
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [viewType, setViewType] = useState("monthly");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const unit = viewType === "monthly" ? "month" : "year";
   const dateFormat = viewType === "monthly" ? "MM-DD" : "YYYY-MM";
@@ -85,6 +86,30 @@ export function useStatsData(allExpenses, colors) {
     (currentDate.isSame(firstExpenseDate, unit) ||
       currentDate.isBefore(firstExpenseDate, unit));
 
+  // bar chart aspect ratio handling
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const chartAspect = useMemo(() => {
+    if (windowWidth > 1200) return 1.5;
+    if (windowWidth < 500) return 0.9;
+
+    return windowWidth < 800 ? 1.0 : 1.2;
+  }, [windowWidth]);
+
+  // bar chart customed label
+  const formatXAxis = (value) => {
+    if (viewType === "yearly") {
+      const monthIndex = parseInt(value.split("-")[1], 10) - 1;
+      const date = new Date(new Date().getFullYear(), monthIndex, 1);
+      return date.toLocaleString("default", { month: "short" });
+    }
+    return value;
+  };
+
   return {
     currentDate,
     viewType,
@@ -96,5 +121,8 @@ export function useStatsData(allExpenses, colors) {
     isFuture,
     isPast,
     unit,
+    chartAspect,
+    windowWidth,
+    formatXAxis,
   };
 }
