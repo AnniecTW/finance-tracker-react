@@ -27,7 +27,47 @@ export function useStatsData(allExpenses, colors) {
   }, [allExpenses, currentDate, unit]);
 
   // statistical data
+
   const stats = useMemo(() => {
+    const fillMissingDates = (
+      groupedData,
+      viewType,
+      categories,
+      referenceDate,
+    ) => {
+      const finalized = [];
+      let startDate, endDate, dateUnit, format;
+
+      if (viewType === "monthly") {
+        startDate = dayjs(referenceDate).startOf("month");
+        endDate = dayjs(referenceDate).endOf("month");
+        dateUnit = "day";
+        format = "MM-DD";
+      } else {
+        startDate = dayjs(referenceDate).startOf("year");
+        endDate = dayjs(referenceDate).endOf("year");
+        dateUnit = "month";
+        format = "YYYY-MM";
+      }
+
+      let current = startDate;
+
+      while (current.isBefore(endDate) || current.isSame(endDate, unit)) {
+        const dateKey = current.format(format);
+
+        if (groupedData[dateKey]) {
+          finalized.push(groupedData[dateKey]);
+        } else {
+          const emptyEntry = { date: dateKey };
+          categories.forEach((cat) => (emptyEntry[cat] = 0));
+          finalized.push(emptyEntry);
+        }
+        current = current.add(1, dateUnit);
+      }
+
+      return finalized;
+    };
+
     if (!filteredExpenses.length)
       return { pieData: [], barData: [], categories: [], totalAmount: 0 };
 
@@ -54,7 +94,14 @@ export function useStatsData(allExpenses, colors) {
       return acc;
     }, {});
 
-    const sortedBarData = Object.values(grouped).sort((a, b) =>
+    const finalizedBarData = fillMissingDates(
+      grouped,
+      viewType,
+      uniqueCategories,
+      currentDate,
+    );
+
+    const sortedBarData = [...finalizedBarData].sort((a, b) =>
       a.date > b.date ? 1 : -1,
     );
 
@@ -72,7 +119,7 @@ export function useStatsData(allExpenses, colors) {
       categories: uniqueCategories,
       totalAmount: currentTotal,
     };
-  }, [filteredExpenses, dateFormat, colors]);
+  }, [filteredExpenses, viewType, dateFormat, currentDate, unit, colors]);
 
   // boundary check
   const now = dayjs();
@@ -107,7 +154,8 @@ export function useStatsData(allExpenses, colors) {
       const date = new Date(new Date().getFullYear(), monthIndex, 1);
       return date.toLocaleString("default", { month: "short" });
     }
-    return value;
+    const date = dayjs(value).format("D");
+    return date;
   };
 
   return {

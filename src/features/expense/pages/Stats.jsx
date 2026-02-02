@@ -62,7 +62,7 @@ function Stats() {
         textAnchor={textAnchor}
         dominantBaseline="central"
       >
-        <tspan x={x} dy="-0.6em" fontweight="600" fontSize="16px">
+        <tspan x={x} dy="-0.6em" fontWeight="600" fontSize="16px">
           {name}
         </tspan>
         <tspan x={x} dy="1.4em" fontSize="14px">
@@ -175,7 +175,7 @@ function Stats() {
                   tickLine={false}
                   tickFormatter={formatXAxis}
                   tick={{ fontSize: "inherit" }}
-                  interval={0}
+                  interval={viewType === "monthly" ? 3 : 0}
                 />
                 <YAxis width="auto" tickLine={false} />
                 <Tooltip
