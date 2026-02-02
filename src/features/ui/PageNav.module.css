@@ -42,7 +42,7 @@
 }
 
 .navLink:global(.active) {
-  background-color: var(--clr-bg-2, #222);
+  background-color: var(--clr-bg-hl, #222);
   color: white;
 }
 

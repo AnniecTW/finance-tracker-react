@@ -11,7 +11,7 @@ function AddExpense() {
         onSubmit={(data) =>
           addExpense({
             ...data,
-            userID: "36a8bcb9-efd6-4be0-880c-d80f95068c3b",
+            user_id: "36a8bcb9-efd6-4be0-880c-d80f95068c3b",
           })
         }
         isSubmitting={isAdding}

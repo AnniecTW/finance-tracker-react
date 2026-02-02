@@ -29,7 +29,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, var(--clr-bg-2), var(--clr-hl));
+  background: linear-gradient(135deg, var(--clr-bg-hl), var(--clr-hl));
   border-radius: 1.5rem;
 }
 
@@ -44,6 +44,6 @@
 }
 
 .input:focus {
-  border-color: var(--clr-bg-2);
-  background-color: var(--clr-bg-element);
+  border-color: var(--clr-bg-hl);
+  background-color: var(--clr-bg-card);
 }

@@ -1,0 +1,129 @@
+.statsControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .statsControls {
+    flex-direction: column;
+  }
+}
+
+.statsControls button {
+  font-size: inherit;
+  padding: 4px 12px;
+}
+
+.viewToggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.viewToggle button.active {
+  background-color: var(--clr-btn) !important;
+  font-weight: 600;
+}
+
+.dateNav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dateDisplay {
+  font-weight: 600;
+  min-width: 150px;
+  text-align: center;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  border: 2px dashed var(--clr-border-dashed);
+  border-radius: 12px;
+  color: var(----clr-text-muted);
+  margin: 20px 0;
+  background-color: var(--clr-bg-main);
+}
+
+.emptyState p {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.chartContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pieContainer {
+  flex: 1 1 300px;
+  height: 300px;
+}
+
+.barContainer {
+  flex: 2 1 500px;
+}
+
+:global(.recharts-default-legend) {
+  font-weight: 500;
+}
+
+:global(.recharts-cartesian-axis-tick-value) {
+  fill: var(--clr-text-muted);
+}
+
+:global(.recharts-default-tooltip) {
+  padding: 8px 12px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  :global(.recharts-default-legend) {
+    font-size: 16px;
+  }
+  :global(.recharts-cartesian-axis-tick-value) {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  :global(.recharts-default-tooltip) {
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+  }
+
+  :global(.recharts-tooltip-item) {
+    padding: 1px 0 !important;
+    font-size: 11px !important;
+  }
+
+  :global(.recharts-tooltip-label) {
+    margin-bottom: 2px !important;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 480px) {
+  :global(.recharts-default-legend) {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  :global(.recharts-legend-item) {
+    margin-right: 5px !important;
+  }
+
+  :global(.recharts-cartesian-axis-tick-value) {
+    font-size: 12px;
+  }
+}
