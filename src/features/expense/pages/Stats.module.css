@@ -1,16 +1,11 @@
 .statsControls {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 0;
+  margin: 1.5rem 0 1rem 0;
   gap: 1rem;
   font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
-  .statsControls {
-    flex-direction: column;
-  }
 }
 
 .statsControls button {
@@ -38,6 +33,23 @@
   font-weight: 600;
   min-width: 150px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .statsControls {
+    font-size: 14px;
+  }
+
+  .dateDisplay {
+    min-width: 75px;
+  }
+}
+
+.yearDisplay {
+  position: absolute;
+  left: 2px;
+  top: -30px;
+  font-weight: 600;
 }
 
 .emptyState {
@@ -71,6 +83,16 @@
 
 .barContainer {
   flex: 2 1 500px;
+}
+
+.responsiveTick {
+  font-size: 12px !important;
+}
+
+@media (max-width: 850px) {
+  .responsiveTick {
+    font-size: 9px !important;
+  }
 }
 
 :global(.recharts-default-legend) {
