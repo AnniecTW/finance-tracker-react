@@ -6,8 +6,8 @@ export function useStatsData(allExpenses, colors) {
   const [viewType, setViewType] = useState("monthly");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const internalFormat = viewType === "monthly" ? "YYYY-MM-DD" : "YYYY-MM";
   const unit = viewType === "monthly" ? "month" : "year";
-  const dateFormat = viewType === "monthly" ? "MM-DD" : "YYYY-MM";
 
   // handling navigation
   const handlePrev = () => {
@@ -21,13 +21,12 @@ export function useStatsData(allExpenses, colors) {
   // filtering data
   const filteredExpenses = useMemo(() => {
     return allExpenses.filter((item) => {
-      const itemDate = dayjs(item.created_at);
+      const itemDate = dayjs(item.created_at).startOf("day");
       return itemDate.isSame(currentDate, unit);
     });
   }, [allExpenses, currentDate, unit]);
 
   // statistical data
-
   const stats = useMemo(() => {
     const fillMissingDates = (
       groupedData,
@@ -36,24 +35,22 @@ export function useStatsData(allExpenses, colors) {
       referenceDate,
     ) => {
       const finalized = [];
-      let startDate, endDate, dateUnit, format;
+      let startDate, endDate, dateUnit;
 
       if (viewType === "monthly") {
         startDate = dayjs(referenceDate).startOf("month");
         endDate = dayjs(referenceDate).endOf("month");
         dateUnit = "day";
-        format = "MM-DD";
       } else {
         startDate = dayjs(referenceDate).startOf("year");
         endDate = dayjs(referenceDate).endOf("year");
         dateUnit = "month";
-        format = "YYYY-MM";
       }
 
       let current = startDate;
 
-      while (current.isBefore(endDate) || current.isSame(endDate, unit)) {
-        const dateKey = current.format(format);
+      while (current.isBefore(endDate) || current.isSame(endDate, dateUnit)) {
+        const dateKey = current.format(internalFormat);
 
         if (groupedData[dateKey]) {
           finalized.push(groupedData[dateKey]);
@@ -83,7 +80,7 @@ export function useStatsData(allExpenses, colors) {
       pieMap[curr.category] += curr.amount;
       currentTotal += curr.amount;
 
-      const dateKey = dayjs(curr.created_at).format(dateFormat);
+      const dateKey = dayjs(curr.created_at).format(internalFormat);
 
       if (!acc[dateKey]) {
         acc[dateKey] = { date: dateKey };
@@ -119,7 +116,7 @@ export function useStatsData(allExpenses, colors) {
       categories: uniqueCategories,
       totalAmount: currentTotal,
     };
-  }, [filteredExpenses, viewType, dateFormat, currentDate, unit, colors]);
+  }, [filteredExpenses, viewType, internalFormat, currentDate, colors]);
 
   // boundary check
   const now = dayjs();
@@ -150,12 +147,9 @@ export function useStatsData(allExpenses, colors) {
   // bar chart customed label
   const formatXAxis = (value) => {
     if (viewType === "yearly") {
-      const monthIndex = parseInt(value.split("-")[1], 10) - 1;
-      const date = new Date(new Date().getFullYear(), monthIndex, 1);
-      return date.toLocaleString("default", { month: "short" });
+      return dayjs(value).format("MMM");
     }
-    const date = dayjs(value).format("D");
-    return date;
+    return dayjs(value).format("D");
   };
 
   return {
