@@ -62,10 +62,10 @@ function Stats() {
         textAnchor={textAnchor}
         dominantBaseline="central"
       >
-        <tspan x={x} dy="-0.6em" fontWeight="600" fontSize="16px">
+        <tspan x={x} dy="-0.6em" fontWeight="600" fontSize="15px">
           {name}
         </tspan>
-        <tspan x={x} dy="1.4em" fontSize="14px">
+        <tspan x={x} dy="1.4em" fontSize="13px">
           ${value}
         </tspan>
       </text>
@@ -83,18 +83,21 @@ function Stats() {
   return (
     <section>
       <div className={styles.statsControls}>
+        <span className={styles.yearDisplay}>
+          {isMobile ? currentDate.format("YYYY") : ""}
+        </span>
         <div className={styles.viewToggle}>
           <Button
             onClick={() => setViewType("monthly")}
             className={viewType === "monthly" ? styles.active : ""}
           >
-            Monthly
+            {isMobile ? "Mo." : "Monthly"}
           </Button>
           <Button
             onClick={() => setViewType("yearly")}
             className={viewType === "yearly" ? styles.active : ""}
           >
-            Yearly
+            {isMobile ? "Yr." : "Yearly"}
           </Button>
         </div>
         <div className={styles.dateNav}>
@@ -103,7 +106,7 @@ function Stats() {
           </Button>
           <span className={styles.dateDisplay}>
             {viewType === "monthly"
-              ? currentDate.format("YYYY MMMM")
+              ? currentDate.format("MMMM")
               : currentDate.format("YYYY")}
           </span>
           <Button onClick={handleNext} disabled={isFuture}>
@@ -174,8 +177,13 @@ function Stats() {
                   dataKey="date"
                   tickLine={false}
                   tickFormatter={formatXAxis}
-                  tick={{ fontSize: "inherit" }}
+                  tick={{
+                    fontSize: isMobile ? 14 : 18,
+                    textAnchor: isMobile ? "end" : "middle",
+                    dy: -1,
+                  }}
                   interval={viewType === "monthly" ? 3 : 0}
+                  angle={isMobile ? -45 : 0}
                 />
                 <YAxis width="auto" tickLine={false} />
                 <Tooltip
