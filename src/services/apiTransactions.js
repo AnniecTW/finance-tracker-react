@@ -102,15 +102,19 @@ export async function addEditExpense({ id, ...newExpense }) {
     imageUrl = null;
   }
 
-  const { item, amount, category, notes, user_id } = newExpense;
+  const { item, amount, category, transaction_date, notes, user_id } =
+    newExpense;
   const payload = {
     item,
     amount,
     category,
+    transaction_date,
     notes,
     user_id,
     image: imageUrl,
   };
+
+  console.log("Final Payload to Supabase:", payload);
 
   let query = supabase.from("transactions");
 
