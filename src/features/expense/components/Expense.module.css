@@ -1,17 +1,37 @@
 .expenseContainer {
   text-align: center;
   position: relative;
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 .detail {
   display: grid;
-  grid-template-columns: minmax(100px, 1.5fr) minmax(200px, 2.5fr);
-  gap: 1.5rem;
+  grid-template-columns: minmax(100px, 1.5fr) minmax(140px, 2.5fr);
+  gap: 2rem;
   align-items: center;
   justify-items: flex-start;
-  padding: 0 3rem;
-  margin-top: 40px;
+  padding: 0 2rem;
+  margin-top: 20px;
+}
+
+.tag {
+  position: absolute;
+  top: 1.5rem;
+  right: 15px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.tagIncome {
+  background-color: #ebfbee;
+  color: #2b8a3e;
+}
+
+.tagExpense {
+  background-color: #fff5f5;
+  color: #c92a2a;
 }
 
 .notesContent {
@@ -39,7 +59,7 @@
 
   .backButton {
     position: absolute;
-    top: 3rem;
+    top: 1rem;
     left: 5%;
     display: flex;
     align-items: center;

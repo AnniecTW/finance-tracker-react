@@ -20,7 +20,7 @@ function ExpenseForm({
 }) {
   const today = new Date().toISOString().split("T")[0];
 
-  const [type, setType] = useState("expense");
+  const [type, setType] = useState(defaultValues.type || "expense");
 
   const navigate = useNavigate();
   const { data: recentExpenses = [] } = useRecentExpenses();
