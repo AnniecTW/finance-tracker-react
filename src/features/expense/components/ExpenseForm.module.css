@@ -25,6 +25,33 @@
   }
 }
 
+.tabGroup {
+  display: flex;
+  background-color: var(--clr-bg-main);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--clr-text-main);
+}
+
+.activeTab {
+  background-color: var(--clr-bg-card);
+  color: var(--clr-hl-2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .fileInput {
   font-size: 1.4rem;
   cursor: pointer;
