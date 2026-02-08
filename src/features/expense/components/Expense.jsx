@@ -27,11 +27,12 @@ function Expense() {
   const { mutateAsync: addExpense, isAdding } = useAddExpense();
 
   function handleDuplicate() {
+    const { id, ...dataToCopy } = expense;
+
     addExpense({
+      ...dataToCopy,
       item: `Copy of ${expense.item}`,
-      amount: expense.amount,
-      image: expense.image,
-      userID: "36a8bcb9-efd6-4be0-880c-d80f95068c3b",
+      user_id: "36a8bcb9-efd6-4be0-880c-d80f95068c3b",
     });
   }
 
@@ -63,6 +64,8 @@ function Expense() {
           <strong>Item:</strong> <span>{expense.item}</span>
           <strong>Amount:</strong> <span>${expense.amount}</span>
           <strong>Category:</strong> <span>{expense.category}</span>
+          <strong>Date:</strong>{" "}
+          <span>{expense.transaction_date?.split("T")[0]}</span>
           <strong>Notes:</strong>
           <p className={styles.notesContent}>{expense.notes || "---"}</p>
           <strong>Photo</strong>
