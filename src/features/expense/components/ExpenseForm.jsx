@@ -22,6 +22,8 @@ function ExpenseForm({
   submitLabel = "Save",
   onCancel,
 }) {
+  const today = new Date().toISOString().split("T")[0];
+
   const navigate = useNavigate();
   const { data: recentExpenses = [] } = useRecentExpenses();
 
@@ -38,7 +40,10 @@ function ExpenseForm({
     setValue,
     watch,
   } = useForm({
-    defaultValues,
+    defaultValues: {
+      transaction_date: today,
+      ...defaultValues,
+    },
   });
   const { errors } = formState;
 
@@ -49,6 +54,11 @@ function ExpenseForm({
 
   const handleRemoveImage = () => {
     setValue("image", null);
+  };
+
+  const handleCancel = () => {
+    if (onCancel) onCancel();
+    else navigate(-1);
   };
 
   // Smart default
@@ -92,11 +102,6 @@ function ExpenseForm({
       reset();
     }
   }
-
-  const handleCancel = () => {
-    if (onCancel) onCancel();
-    else navigate(-1);
-  };
 
   return (
     <form
@@ -143,6 +148,14 @@ function ExpenseForm({
             </option>
           ))}
         </select>
+      </FormRow>
+      <FormRow label="Date" error={errors?.transaction_date?.message}>
+        <input
+          type="date"
+          className={styles.input}
+          disabled={isSubmitting}
+          {...register("transaction_date", { required: "Date is required" })}
+        ></input>
       </FormRow>
       <FormRow label="Notes" error={errors?.notes?.message}>
         <textarea
