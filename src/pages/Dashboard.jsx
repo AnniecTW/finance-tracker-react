@@ -16,40 +16,107 @@ import {
   isSameYear,
   parseISO,
 } from "date-fns";
+import StatCard from "../features/ui/StatCard";
 
 function Dashboard() {
   const { data: allExpenses = [], isLoading } = useAllExpenses();
 
   const totals = useMemo(() => {
     const now = new Date();
+    const firstDayLastMonth = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      1,
+    );
+    const lastDayLastMonth = new Date(now.getFullYear, now.getMonth(), 0);
 
     return allExpenses.reduce(
       (acc, expense) => {
-        const expenseDate = parseISO(expense.created_at);
+        const expenseDate = parseISO(expense.transaction_date);
         const amount = Number(expense.amount);
+        const isIncome = expense.type === "income";
 
-        acc.all += amount;
+        if (isIncome) acc.income.all += amount;
+        else acc.expense.all += amount;
+
         if (isSameYear(expenseDate, now)) {
-          acc.year += amount;
+          if (isIncome) acc.income.year += amount;
+          else acc.expense.year += amount;
 
           if (isSameMonth(expenseDate, now)) {
-            acc.month += amount;
+            if (isIncome) acc.income.thisMonth += amount;
+            else acc.expense.thisMonth += amount;
 
             if (isSameDay(expenseDate, now)) {
               acc.today += amount;
             }
           }
+
+          if (
+            expenseDate >= firstDayLastMonth &&
+            expenseDate <= lastDayLastMonth
+          ) {
+            if (isIncome) acc.income.lastMonth += amount;
+            else acc.expense.lastMonth += amount;
+          }
         }
 
         if (isSameWeek(expenseDate, now, { weekStartsOn: 1 })) {
-          acc.week += amount;
+          if (isIncome) acc.income.week += amount;
+          else acc.expense.week += amount;
         }
 
         return acc;
       },
-      { all: 0, year: 0, month: 0, week: 0, today: 0 }
+      {
+        income: {
+          all: 0,
+          year: 0,
+          thisMonth: 0,
+          lastMonth: 0,
+          week: 0,
+          today: 0,
+        },
+        expense: {
+          all: 0,
+          year: 0,
+          thisMonth: 0,
+          lastMonth: 0,
+          week: 0,
+          today: 0,
+        },
+      },
     );
   }, [allExpenses]);
+
+  const totalIncome = totals.income.all;
+  const totalExpenses = totals.expense.all;
+  const thisMonthIncome = totals.income.thisMonth;
+  const lastMonthIncome = totals.income.lastMonth;
+  const thisMonthExpense = totals.expense.thisMonth;
+  const lastMonthExpense = totals.expense.lastMonth;
+  const thisMonthBalance = thisMonthIncome - thisMonthExpense;
+  const lastMonthBalance = lastMonthIncome - lastMonthExpense;
+
+  const savingsRate =
+    totalIncome > 0
+      ? (((totalIncome - totalExpenses) / totalIncome) * 100).toFixed(0)
+      : 0;
+  const calculateChange = (current, previous) => {
+    if (previous === 0) return 0;
+    return (((current - previous) / previous) * 100).toFixed(1);
+  };
+
+  const balaceChange = calculateChange(thisMonthBalance, lastMonthBalance);
+  const incomeChange = calculateChange(thisMonthIncome, lastMonthIncome);
+  const expenseChange = calculateChange(thisMonthExpense, lastMonthExpense);
+
+  const metrics = [
+    { type: "balance", metric: thisMonthBalance, change: balaceChange },
+    { type: "income", metric: thisMonthIncome, change: incomeChange },
+    { type: "expense", metric: thisMonthExpense, change: expenseChange },
+    { type: "savingsRate", metric: savingsRate, change: null },
+  ];
 
   if (isLoading) {
     return <Spinner />;
@@ -57,12 +124,11 @@ function Dashboard() {
 
   return (
     <section>
-      <h2 className={styles.sumTitle}>Summary</h2>
-      <div className={styles.para}>
-        <strong>Total Spent:</strong>
-        <span className={styles.span}>${totals.all}</span>
-        <strong>Remaining Budget:</strong>
-        <span className={styles.span}>$</span>
+      <h2 className={styles.mainTitle}>Monthly Summary</h2>
+      <div className={styles.statsGrid}>
+        {metrics.map(({ type, metric, change }, index) => (
+          <StatCard key={type} type={type} metric={metric} change={change} />
+        ))}
       </div>
 
       <div className={styles.para}>
