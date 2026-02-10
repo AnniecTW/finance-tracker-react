@@ -20,7 +20,7 @@ function ExpenseForm({
   submitLabel = "Save",
   onCancel,
 }) {
-  const today = new Date().toISOString().split("T")[0];
+  const today = format(new Date(), "yyyy-MM-dd");
 
   const [type, setType] = useState(defaultValues.type || "expense");
 

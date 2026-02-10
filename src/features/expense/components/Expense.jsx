@@ -41,6 +41,9 @@ function Expense() {
 
   const style = typeStyles[expense?.type];
 
+  const pureDate = expense?.transaction_date.split("T")[0];
+  const expenseDate = new Date(pureDate?.replace(/-/g, "/"));
+
   function handleDuplicate() {
     const { id, ...dataToCopy } = expense;
 
@@ -82,7 +85,7 @@ function Expense() {
           <AmountDisplay amount={expense.amount} type={expense.type} />
           <strong>Category:</strong> <span>{expense.category}</span>
           <strong>Date:</strong>{" "}
-          <span>{expense.transaction_date?.split("T")[0]}</span>
+          <span>{format(expenseDate, "MMM dd, yyyy")}</span>
           <strong>Notes:</strong>
           <p className={styles.notesContent}>{expense.notes || "---"}</p>
           <strong>Photo</strong>
