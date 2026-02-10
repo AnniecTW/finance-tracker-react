@@ -18,6 +18,8 @@
   --clr-text-main: #495057;
   --clr-text-muted: #64748b;
   --clr-btn-text-hover: #333;
+  --clr-status-pos: #10b981;
+  --clr-status-neg: #ef4444;
 
   /* Others */
   --spinner-color: #333;
@@ -33,7 +35,7 @@ body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
   color: var(--clr-text-main);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.6;
 }
 

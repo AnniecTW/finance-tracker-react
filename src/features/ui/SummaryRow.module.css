@@ -1,0 +1,55 @@
+.summaryContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.leftPart {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+  width: fit-content;
+}
+
+.dateRange {
+  font-size: 14px;
+  color: #adb5bd;
+}
+
+.rightPart {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.expenseValue > * {
+  color: var(--clr-status-neg);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.incomeValue > * {
+  color: var(--clr-status-pos);
+  font-weight: 700;
+  font-size: 16px;
+}
