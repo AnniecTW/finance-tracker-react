@@ -1,4 +1,4 @@
-import { useAllExpenses } from "../useExpenses";
+import { useAllExpenses } from "../hooks/useExpenses";
 import styles from "../pages/ExpenseList.module.css";
 
 function TotalAmount() {

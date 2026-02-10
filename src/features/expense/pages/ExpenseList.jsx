@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAllExpenses } from "../useExpenses";
 
+import { useAllExpenses } from "../hooks/useExpenses";
 import ExpenseItem from "../components/ExpenseItem";
 import TotalAmount from "../components/TotalAmount";
 import Spinner from "../../ui/Spinner";
