@@ -115,7 +115,7 @@ export async function addEditExpense({ id, ...newExpense }) {
     image: imageUrl,
   };
 
-  console.log("Final Payload to Supabase:", payload);
+  // console.log("Final Payload to Supabase:", payload);
 
   let query = supabase.from("transactions");
 
