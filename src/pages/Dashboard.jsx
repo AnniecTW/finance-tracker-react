@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { useAllExpenses } from "../features/expense/useExpenses";
+import { useAllExpenses } from "../features/expense/hooks/useExpenses";
+import { useDashboardStats } from "../hooks/useDashboardStats";
 
 import Button from "../features/ui/Button";
 import Spinner from "../features/ui/Spinner";
@@ -9,47 +9,13 @@ import { TbViewportTall } from "react-icons/tb";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { HiOutlineChartBar } from "react-icons/hi2";
 
-import {
-  isSameDay,
-  isSameWeek,
-  isSameMonth,
-  isSameYear,
-  parseISO,
-} from "date-fns";
+import StatCard from "../features/ui/StatCard";
+import SummaryRow from "../features/ui/SummaryRow";
 
 function Dashboard() {
   const { data: allExpenses = [], isLoading } = useAllExpenses();
-
-  const totals = useMemo(() => {
-    const now = new Date();
-
-    return allExpenses.reduce(
-      (acc, expense) => {
-        const expenseDate = parseISO(expense.created_at);
-        const amount = Number(expense.amount);
-
-        acc.all += amount;
-        if (isSameYear(expenseDate, now)) {
-          acc.year += amount;
-
-          if (isSameMonth(expenseDate, now)) {
-            acc.month += amount;
-
-            if (isSameDay(expenseDate, now)) {
-              acc.today += amount;
-            }
-          }
-        }
-
-        if (isSameWeek(expenseDate, now, { weekStartsOn: 1 })) {
-          acc.week += amount;
-        }
-
-        return acc;
-      },
-      { all: 0, year: 0, month: 0, week: 0, today: 0 }
-    );
-  }, [allExpenses]);
+  console.log(allExpenses.length);
+  const { metrics, summaryData } = useDashboardStats(allExpenses);
 
   if (isLoading) {
     return <Spinner />;
@@ -57,24 +23,18 @@ function Dashboard() {
 
   return (
     <section>
-      <h2 className={styles.sumTitle}>Summary</h2>
-      <div className={styles.para}>
-        <strong>Total Spent:</strong>
-        <span className={styles.span}>${totals.all}</span>
-        <strong>Remaining Budget:</strong>
-        <span className={styles.span}>$</span>
+      <h2 className={styles.mainTitle}>Monthly Summary</h2>
+      <div className={styles.statsGrid}>
+        {metrics.map(({ metricType, value, percentageChange }) => (
+          <StatCard
+            key={metricType}
+            metricType={metricType}
+            value={value}
+            percentageChange={percentageChange}
+          />
+        ))}
       </div>
-
-      <div className={styles.para}>
-        <h5 className={styles.subSumTitle}>Today:</h5>
-        <span className={styles.span}>${totals.today}</span>
-        <h5 className={styles.subSumTitle}>This Week:</h5>
-        <span className={styles.span}>${totals.week}</span>
-        <h5 className={styles.subSumTitle}>This Month:</h5>
-        <span className={styles.span}>${totals.month}</span>
-        <h5 className={styles.subSumTitle}>This Year:</h5>
-        <span className={styles.span}>${totals.year}</span>
-      </div>
+      <SummaryRow summaryData={summaryData} />
 
       <div className={styles.link}>
         <Button to="/expenses" aria-label="View all expenses">

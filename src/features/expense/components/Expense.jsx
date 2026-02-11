@@ -1,17 +1,30 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { useExpensesById } from "../useExpenses";
-import { useDeleteExpense } from "../useDeleteExpense";
-import { useEditExpense } from "../useEditExpense";
+import { format } from "date-fns";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useAddExpense } from "../useAddExpense";
+import { useAddExpense } from "../hooks/useAddExpense";
+import { useDeleteExpense } from "../hooks/useDeleteExpense";
+import { useEditExpense } from "../hooks/useEditExpense";
+import { useExpensesById } from "../hooks/useExpenses";
 import styles from "./Expense.module.css";
 
 import Button from "../../ui/Button";
 import ExpenseForm from "./ExpenseForm";
 import Spinner from "../../ui/Spinner";
+import AmountDisplay from "../../ui/AmountDisplay";
 
 import { HiArrowLeft } from "react-icons/hi2";
+
+const typeStyles = {
+  income: {
+    label: "Income",
+    className: styles.tagIncome,
+  },
+  expense: {
+    label: "Expense",
+    className: styles.tagExpense,
+  },
+};
 
 function Expense() {
   const { id } = useParams();
@@ -25,6 +38,11 @@ function Expense() {
   const { editExpense, isEditingExpense } = useEditExpense({ setIsEditing });
 
   const { mutateAsync: addExpense, isAdding } = useAddExpense();
+
+  const style = typeStyles[expense?.type];
+
+  const pureDate = expense?.transaction_date.split("T")[0];
+  const expenseDate = new Date(pureDate?.replace(/-/g, "/"));
 
   function handleDuplicate() {
     const { id, ...dataToCopy } = expense;
@@ -50,7 +68,8 @@ function Expense() {
       >
         <HiArrowLeft />
       </Button>
-      <h3>Expense Detail</h3>
+      <h3>Detail</h3>
+      <span className={`${styles.tag} ${style.className}`}>{style.label}</span>
       {isEditing ? (
         <ExpenseForm
           defaultValues={expense}
@@ -62,10 +81,11 @@ function Expense() {
       ) : (
         <div className={styles.detail}>
           <strong>Item:</strong> <span>{expense.item}</span>
-          <strong>Amount:</strong> <span>${expense.amount}</span>
+          <strong>Amount:</strong>
+          <AmountDisplay amount={expense.amount} type={expense.type} />
           <strong>Category:</strong> <span>{expense.category}</span>
           <strong>Date:</strong>{" "}
-          <span>{expense.transaction_date?.split("T")[0]}</span>
+          <span>{format(expenseDate, "MMM dd, yyyy")}</span>
           <strong>Notes:</strong>
           <p className={styles.notesContent}>{expense.notes || "---"}</p>
           <strong>Photo</strong>

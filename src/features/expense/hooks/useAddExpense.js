@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addEditExpense } from "../../services/apiTransactions";
+import { addEditExpense } from "../../../services/apiTransactions";
 
 export function useAddExpense({ onSuccess } = {}) {
   const queryClient = useQueryClient();

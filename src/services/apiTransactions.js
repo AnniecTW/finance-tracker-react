@@ -4,7 +4,7 @@ export async function getAllExpenses() {
   const { data, error } = await supabase
     .from("transactions")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("transaction_date", { ascending: false });
 
   if (error) {
     console.error(error);
@@ -19,7 +19,7 @@ export async function getRecentExpenses() {
   const { data, error } = await supabase
     .from("transactions")
     .select("*")
-    .order("created_at", { ascending: false })
+    .order("transaction_date", { ascending: false })
     .limit(50);
 
   if (error) {
@@ -102,9 +102,10 @@ export async function addEditExpense({ id, ...newExpense }) {
     imageUrl = null;
   }
 
-  const { item, amount, category, transaction_date, notes, user_id } =
+  const { type, item, amount, category, transaction_date, notes, user_id } =
     newExpense;
   const payload = {
+    type,
     item,
     amount,
     category,
@@ -114,7 +115,7 @@ export async function addEditExpense({ id, ...newExpense }) {
     image: imageUrl,
   };
 
-  console.log("Final Payload to Supabase:", payload);
+  // console.log("Final Payload to Supabase:", payload);
 
   let query = supabase.from("transactions");
 

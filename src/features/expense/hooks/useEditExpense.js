@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addEditExpense } from "../../services/apiTransactions";
+import { addEditExpense } from "../../../services/apiTransactions";
 import toast from "react-hot-toast";
 
 export function useEditExpense({ setIsEditing }) {

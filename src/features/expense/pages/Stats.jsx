@@ -9,8 +9,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useAllExpenses } from "../useExpenses";
-import { useStatsData } from "../useStatsData";
+import { useStatsData } from "../hooks/useStatsData";
+import { useAllExpenses } from "../hooks/useExpenses";
 import styles from "./Stats.module.css";
 import Button from "../../ui/Button";
 import Spinner from "../../ui/Spinner";

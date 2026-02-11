@@ -3,7 +3,7 @@ import {
   getAllExpenses,
   getExpenseById,
   getRecentExpenses,
-} from "../../services/apiTransactions";
+} from "../../../services/apiTransactions";
 
 export function useAllExpenses() {
   return useQuery({

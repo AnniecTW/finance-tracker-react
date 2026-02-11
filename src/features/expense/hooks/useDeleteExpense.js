@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteExpenseById } from "../../services/apiTransactions";
+import { deleteExpenseById } from "../../../services/apiTransactions";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
