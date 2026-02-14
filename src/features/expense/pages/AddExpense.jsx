@@ -8,12 +8,7 @@ function AddExpense() {
     <section className={styles.addExpenseContainer}>
       <h2>Add New Expense 💲</h2>
       <ExpenseForm
-        onSubmit={(data) =>
-          addExpense({
-            ...data,
-            user_id: "36a8bcb9-efd6-4be0-880c-d80f95068c3b",
-          })
-        }
+        onSubmit={(data) => addExpense({ data })}
         isSubmitting={isAdding}
         submitLabel="Add"
       />
