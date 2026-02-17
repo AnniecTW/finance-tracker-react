@@ -8,7 +8,7 @@ function AddExpense() {
     <section className={styles.addExpenseContainer}>
       <h2>Add New Expense 💲</h2>
       <ExpenseForm
-        onSubmit={(data) => addExpense({ data })}
+        onSubmit={(data) => addExpense(data)}
         isSubmitting={isAdding}
         submitLabel="Add"
       />

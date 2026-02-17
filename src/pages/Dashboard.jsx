@@ -14,7 +14,6 @@ import SummaryRow from "../features/ui/SummaryRow";
 
 function Dashboard() {
   const { data: allExpenses = [], isLoading } = useAllExpenses();
-  console.log(allExpenses.length);
   const { metrics, summaryData } = useDashboardStats(allExpenses);
 
   if (isLoading) {

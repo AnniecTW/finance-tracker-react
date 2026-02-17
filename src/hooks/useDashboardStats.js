@@ -57,7 +57,6 @@ export function useDashboardStats(allExpenses) {
 
             if (isSameDay(expenseDate, now)) {
               acc[target].today += amount;
-              console.log("找到今天的資料了！", expense);
             }
           }
         }
