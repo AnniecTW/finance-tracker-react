@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { useRecentExpenses } from "../hooks/useExpenses";
+import { useUser } from "../../user/useUser";
 
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
@@ -20,6 +21,7 @@ function ExpenseForm({
   submitLabel = "Save",
   onCancel,
 }) {
+  const { user } = useUser();
   const today = format(new Date(), "yyyy-MM-dd");
 
   const [type, setType] = useState(defaultValues.type || "expense");
@@ -109,6 +111,7 @@ function ExpenseForm({
       type: type,
       amount: Number(data.amount),
       image: imageValue,
+      user_id: user?.id,
     });
 
     if (submitLabel === "Add") {
