@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useAllExpenses } from "../hooks/useExpenses";
 import ExpenseItem from "../components/ExpenseItem";
-import TotalAmount from "../components/TotalAmount";
 import Spinner from "../../ui/Spinner";
 import styles from "./ExpenseList.module.css";
 
@@ -40,7 +39,6 @@ function ExpenseList() {
         {allExpenses.map((expense) => (
           <ExpenseItem key={expense.id} expense={expense} />
         ))}
-        <TotalAmount />
       </ul>
       <div className={styles.detailContainer}>
         <AnimatePresence mode="wait">
