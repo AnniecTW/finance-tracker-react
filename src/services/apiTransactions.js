@@ -4,7 +4,8 @@ export async function getAllExpenses() {
   const { data, error } = await supabase
     .from("transactions")
     .select("*")
-    .order("transaction_date", { ascending: false });
+    .order("transaction_date", { ascending: false })
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.error(error);
@@ -20,6 +21,7 @@ export async function getRecentExpenses() {
     .from("transactions")
     .select("*")
     .order("transaction_date", { ascending: false })
+    .order("created_at", { ascending: false })
     .limit(50);
 
   if (error) {
