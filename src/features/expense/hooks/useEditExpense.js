@@ -12,7 +12,7 @@ export function useEditExpense({ setIsEditing }) {
           "Missing expense id: cannot update expense without id.",
         );
       }
-      return addEditExpense(data, id);
+      return addEditExpense({ ...data, id });
     },
     onSuccess: (data, { id }) => {
       toast.success("Expense updated");
