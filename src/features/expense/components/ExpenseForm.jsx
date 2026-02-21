@@ -101,6 +101,7 @@ function ExpenseForm({
   ]);
 
   function handleFormSubmit(data) {
+    if (!user?.id) return;
     const hasNewImage =
       data.image instanceof File ||
       (data.image instanceof FileList && data.image.length > 0);
@@ -233,7 +234,11 @@ function ExpenseForm({
           </div>
         </FormRow>
         <div className={styles.formButtons}>
-          <Button type="submit" disabled={isSubmitting} variation="primary">
+          <Button
+            type="submit"
+            disabled={isSubmitting || !user?.id}
+            variation="primary"
+          >
             {isSubmitting ? "Saving..." : submitLabel}
           </Button>
           {<Button onClick={handleCancel}>Cancel</Button>}

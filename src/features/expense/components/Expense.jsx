@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
+import { useUser } from "../../user/useUser";
 import { useAddExpense } from "../hooks/useAddExpense";
 import { useDeleteExpense } from "../hooks/useDeleteExpense";
 import { useEditExpense } from "../hooks/useEditExpense";
@@ -28,6 +29,7 @@ const typeStyles = {
 
 function Expense() {
   const { id } = useParams();
+  const { user } = useUser();
   const navigate = useNavigate();
 
   // Fetch expense by id
@@ -45,12 +47,17 @@ function Expense() {
   const expenseDate = new Date(pureDate?.replace(/-/g, "/"));
 
   function handleDuplicate() {
-    const { id, ...dataToCopy } = expense;
+    if (!expense) return;
+
+    const userId = user?.id;
+    if (!userId) return;
+
+    const { id: _id, ...dataToCopy } = expense;
 
     addExpense({
       ...dataToCopy,
       item: `Copy of ${expense.item}`,
-      user_id: "36a8bcb9-efd6-4be0-880c-d80f95068c3b",
+      user_id: userId,
     });
   }
 
@@ -102,7 +109,7 @@ function Expense() {
             }}
           />
           <div className={styles.btnGroup}>
-            <Button onClick={handleDuplicate} disabled={isAdding}>
+            <Button onClick={handleDuplicate} disabled={isAdding || !user?.id}>
               <HiSquare2Stack />
             </Button>
             <Button onClick={() => setIsEditing(true)}>
