@@ -156,6 +156,7 @@ function ExpenseForm({
             type="number"
             id="amount"
             min="0"
+            step="0.01"
             className={styles.input}
             disabled={isSubmitting}
             {...register("amount", {
