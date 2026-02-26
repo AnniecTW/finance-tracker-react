@@ -33,8 +33,7 @@ export function useDashboardStats(allExpenses) {
       (acc, expense) => {
         if (!expense.transaction_date || !expense.amount) return acc;
 
-        const pureDate = expense.transaction_date.split("T")[0];
-        const expenseDate = new Date(pureDate.replace(/-/g, "/"));
+        const expenseDate = new Date(expense.transaction_date.replace(/-/g, "/"));
 
         const amount = Number(expense.amount);
         const isIncome = expense.type === "income";

@@ -43,8 +43,7 @@ function Expense() {
 
   const style = typeStyles[expense?.type];
 
-  const pureDate = expense?.transaction_date.split("T")[0];
-  const expenseDate = new Date(pureDate?.replace(/-/g, "/"));
+  const expenseDate = new Date(expense?.transaction_date?.replace(/-/g, "/"));
 
   function handleDuplicate() {
     if (!expense) return;
