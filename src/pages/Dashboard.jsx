@@ -1,5 +1,4 @@
-import { useAllExpenses } from "../features/expense/hooks/useExpenses";
-import { useDashboardStats } from "../hooks/useDashboardStats";
+import { useDashboardStatsApi } from "../hooks/useDashboardStatsApi";
 
 import Button from "../features/ui/Button";
 import Spinner from "../features/ui/Spinner";
@@ -13,8 +12,8 @@ import StatCard from "../features/ui/StatCard";
 import SummaryRow from "../features/ui/SummaryRow";
 
 function Dashboard() {
-  const { data: allExpenses = [], isLoading } = useAllExpenses();
-  const { metrics, summaryData } = useDashboardStats(allExpenses);
+  const { data, isLoading } = useDashboardStatsApi();
+  const { metrics = [], summaryData = [] } = data ?? {};
 
   if (isLoading) {
     return <Spinner />;
