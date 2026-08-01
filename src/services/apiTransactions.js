@@ -1,4 +1,4 @@
-import supabase, { supabaseUrl } from "./supabase";
+import supabase from "./supabase";
 
 export async function getAllExpenses() {
   const { data, error } = await supabase
@@ -72,30 +72,30 @@ export async function addEditExpense({ id, ...newExpense }) {
     imageField instanceof File ||
     (imageField instanceof FileList && imageField.length > 0);
 
-  const hasImagePath =
-    typeof imageField === "string" &&
-    imageField.startsWith(
-      `${supabaseUrl}/storage/v1/object/public/transaction-images`,
-    );
+  const hasImagePath = typeof imageField === "string" && imageField.length > 0;
 
   let imageUrl = null;
 
   if (isNewFile) {
     // new image uploaded
     const file = imageField instanceof FileList ? imageField[0] : imageField;
-    const imageName = `${Math.random()}-${file.name}`.replaceAll("/", "");
 
-    const { error: uploadError } = await supabase.storage
-      .from("transaction-images")
-      .upload(imageName, file);
+    const res = await fetch("/api/upload-token");
+    if (!res.ok) throw new Error("Could not get upload token");
+    const { uploadUrl, publicUrl } = await res.json();
 
-    if (uploadError) throw new Error("Image upload failed");
+    // upload file to Azure Blob
+    const uploadRes = await fetch(uploadUrl, {
+      method: "PUT",
+      headers: {
+        "x-ms-blob-type": "BlockBlob",
+        "Content-Type": file.type,
+      },
+      body: file,
+    });
+    if (!uploadRes.ok) throw new Error("Image upload failed");
 
-    const { data: publicData } = supabase.storage
-      .from("transaction-images")
-      .getPublicUrl(imageName);
-
-    imageUrl = publicData.publicUrl;
+    imageUrl = publicUrl;
   } else if (hasImagePath) {
     // image unchanged
     imageUrl = imageField;
@@ -116,8 +116,6 @@ export async function addEditExpense({ id, ...newExpense }) {
     user_id,
     image: imageUrl,
   };
-
-  // console.log("Final Payload to Supabase:", payload);
 
   let query = supabase.from("transactions");
 
