@@ -1,4 +1,9 @@
-import { app } from "@azure/functions";
+import {
+  app,
+  HttpRequest,
+  HttpResponseInit,
+  InvocationContext,
+} from "@azure/functions";
 import {
   StorageSharedKeyCredential,
   generateBlobSASQueryParameters,
@@ -7,8 +12,8 @@ import {
 } from "@azure/storage-blob";
 import { randomUUID } from "node:crypto";
 
-const account = process.env.AZURE_STORAGE_ACCOUNT;
-const accountKey = process.env.AZURE_STORAGE_KEY;
+const account = process.env.AZURE_STORAGE_ACCOUNT!;
+const accountKey = process.env.AZURE_STORAGE_KEY!;
 const containerName = "transaction-images";
 
 const credential = new StorageSharedKeyCredential(account, accountKey);
@@ -16,7 +21,10 @@ const credential = new StorageSharedKeyCredential(account, accountKey);
 app.http("upload-token", {
   methods: ["GET"],
   authLevel: "anonymous",
-  handler: async (request, context) => {
+  handler: async (
+    request: HttpRequest,
+    context: InvocationContext,
+  ): Promise<HttpResponseInit> => {
     try {
       const blobName = randomUUID();
 
