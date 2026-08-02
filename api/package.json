@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
+  "main": "dist/{index.js,functions/*.js}",
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
@@ -13,5 +17,8 @@
     "@supabase/supabase-js": "^2.111.0",
     "date-fns": "^4.4.0"
   },
-  "main": "src/{index.js,functions/*.js}"
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
 }
