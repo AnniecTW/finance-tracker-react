@@ -5,6 +5,7 @@ import {
   InvocationContext,
 } from "@azure/functions";
 import { chatCompletionJson } from "../lib/openai.js";
+import { getUserId } from "../lib/auth.js";
 import { receiptSchema, type Receipt } from "../schemas/receipt.js";
 
 const SYSTEM_PROMPT = `You are a receipt parsing assistant for a personal finance app.
@@ -54,13 +55,18 @@ async function extractReceipt(image: string): Promise<ExtractOutcome> {
 
 app.http("receipt-parse", {
   methods: ["POST"],
-  authLevel: "anonymous", // TODO: add JWT auth
+  authLevel: "anonymous", // Azure key off; gate with a Supabase JWT in-handler
   route: "receipt/parse",
   handler: async (
     request: HttpRequest,
     context: InvocationContext,
   ): Promise<HttpResponseInit> => {
     try {
+      const userId = await getUserId(request);
+      if (!userId) {
+        return { status: 401, jsonBody: { error: "Unauthorized" } };
+      }
+
       const body = (await request.json()) as { image?: string };
       if (!body.image) {
         return {
