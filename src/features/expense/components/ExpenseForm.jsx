@@ -3,7 +3,9 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { useRecentExpenses } from "../hooks/useExpenses";
+import { useParseReceipt } from "../hooks/useParseReceipt";
 import { useUser } from "../../user/useUser";
+import toast from "react-hot-toast";
 
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
@@ -53,6 +55,39 @@ function ExpenseForm({
   const currentImage = watch("image");
   const hasImage =
     currentImage instanceof FileList ? currentImage.length > 0 : !!currentImage;
+
+  // Only a freshly-selected file can be scanned
+  const selectedFile =
+    currentImage instanceof FileList
+      ? currentImage[0]
+      : currentImage instanceof File
+        ? currentImage
+        : null;
+
+  const { scanReceipt, isScanning } = useParseReceipt();
+
+  const handleScan = () => {
+    if (!selectedFile) return;
+    scanReceipt(selectedFile, {
+      onSuccess: (data) => {
+        setType("expense");
+        if (data.merchant)
+          setValue("item", data.merchant, { shouldValidate: true });
+        if (data.total_amount != null)
+          setValue("amount", data.total_amount, { shouldValidate: true });
+        if (data.date)
+          setValue("transaction_date", data.date, { shouldValidate: true });
+        if (
+          data.suggested_category &&
+          CATEGORIES.expense.includes(data.suggested_category)
+        )
+          setValue("category", data.suggested_category, {
+            shouldValidate: true,
+          });
+        toast.success("Receipt scanned — please review the fields");
+      },
+    });
+  };
 
   const handleRemoveImage = () => {
     setValue("image", null);
@@ -224,6 +259,15 @@ function ExpenseForm({
                     ? "Existing Image"
                     : "New Image Selected"}
                 </span>
+                {selectedFile && (
+                  <Button
+                    type="button"
+                    onClick={handleScan}
+                    disabled={isScanning}
+                  >
+                    {isScanning ? "Scanning…" : "✨ Scan receipt"}
+                  </Button>
+                )}
                 <Button
                   onClick={handleRemoveImage}
                   className={styles.deleteBtn}
