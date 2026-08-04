@@ -24,7 +24,8 @@ async function parseReceipt(file) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${session.access_token}`,
+      // Custom header: SWA strips Authorization before it reaches the function
+      "x-supabase-token": session.access_token,
     },
     body: JSON.stringify({ image }),
   });
