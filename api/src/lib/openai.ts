@@ -24,6 +24,7 @@ export async function chatCompletionJson(
     body: JSON.stringify({
       messages,
       response_format: { type: "json_object" },
+      reasoning_effort: "low", // Cuts tokens/latency
     }),
   });
 
