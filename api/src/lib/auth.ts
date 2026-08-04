@@ -7,8 +7,13 @@ const supabase = createClient(
 );
 
 export async function getUserId(request: HttpRequest): Promise<string | null> {
-  const authHeader = request.headers.get("authorization") ?? "";
-  const token = authHeader.replace(/^Bearer\s+/i, "").trim();
+  // Azure SWA consumes Authorization header before it reaches
+  // managed functions, so the client sends the token in a custom header
+  const token =
+    request.headers.get("x-supabase-token")?.trim() ||
+    (request.headers.get("authorization") ?? "")
+      .replace(/^Bearer\s+/i, "")
+      .trim();
   if (!token) return null;
 
   const { data, error } = await supabase.auth.getUser(token);
